@@ -1,0 +1,21 @@
+//------------------------------------------//
+1.Primary Color Palette
+
+Background	#FFFFFF	White	Clean main background
+Primary Brown	#7B4F28	Rich Brown	Your brand color base
+Accent Beige	#F5EFE6	Light Beige	Soft background for cards/sections
+
+2.Button Colors
+Button Type	Background	Text Color	Hover Effect
+Primary	#7B4F28 (Brown)	#FFFFFF (White)	Slightly darker #5c3b1d
+Secondary	#F5EFE6 (Beige)	#7B4F28 (Brown)	Add a soft border or shadow
+Accent	#D4A373 (Tan)	#FFFFFF	Hover #b97b42
+
+3.Card Styling
+Part	Suggested Color
+Card BG	#FFFFFF or #F5EFE6
+Card Border	#E0D6CC (very soft brown border)
+Title Text	#7B4F28
+Body Text	#5C3B1D (darker brown)
+
+//------------------//
