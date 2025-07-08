@@ -29,7 +29,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-6 items-center text-md font-semibold">
-          <NavLink to="/" className={({ isActive }) => isActive ? "text-[#D4A373]" : ""}>Home</NavLink>
+          <NavLink to="/" className={({ isActive }) => isActive ? "text-[#D4A373] " : ""}>Home</NavLink>
           <NavLink to="/about" className={({ isActive }) => isActive ? "text-[#D4A373]" : ""}>About</NavLink>
           <NavLink to="/contact" className={({ isActive }) => isActive ? "text-[#D4A373]" : ""}>Contact</NavLink>
 
@@ -37,7 +37,7 @@ const Navbar = () => {
             <>
               <NavLink to="/alldonations" className={({ isActive }) => isActive ? "text-[#D4A373]" : ""}>All Donations</NavLink>
               <NavLink to="/dashboard" className={({ isActive }) => isActive ? "text-[#D4A373]" : ""}>Dashboard</NavLink>
-              <button onClick={handleLogout} className="hover:text-[#D4A373]">Logout</button>
+              <button onClick={handleLogout} className="hover:text-[#D4A373]">LogOut</button>
             </>
           )}
 
