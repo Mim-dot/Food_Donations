@@ -11,7 +11,7 @@ const RequestDonation = ({ show, onClose, donation, pickupTime, setPickupTime })
           onSubmit={(e) => {
             e.preventDefault();
             alert(`Pickup time: ${pickupTime}`);
-            onClose(); // ✅ Close modal after submit
+            onClose(); 
           }}
         >
           <Input label="Donation Title" value={donation.title} readOnly />

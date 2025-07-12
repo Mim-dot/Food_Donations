@@ -5,11 +5,13 @@ import { motion } from "framer-motion";
 import Useable from "../Useable";
 import Lottie from "lottie-react";
 import loadingAnimation from '../assets/loadingAnimation.json'
+import AxiosSecure from "../Hook/AxiosSecure";
 const Alldones = () => {
   const [donations, setDonations] = useState([]);
 const [loading, setLoading] = useState(true);
+ const axiossecure = AxiosSecure();
   useEffect(() => {
-    axios.get("http://localhost:7000/all/donations")
+    axiossecure.get("/all/donations") 
       .then((res) => setDonations(res.data))
       .catch((err) => console.error("Failed to load donations", err))
       .finally(() => setLoading(false));

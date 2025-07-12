@@ -3,6 +3,8 @@ import { Link, Outlet, useLocation } from "react-router";
 import User from "./User/User";
 import ProfileDes from "./User/ProfileDes";
 import Restauran from "./Restaurant/Restauran";
+import Charity from "./Charity/Charity";
+import Admin from "./Admin/Admin";
 
 const Dashboard = () => {
 
@@ -18,8 +20,10 @@ const Dashboard = () => {
        <ProfileDes/>
 
         {/* Navigation Links */}
-        {/* <User/> */}
+        <User/>
         <Restauran/>
+        <Charity/>
+        <Admin/>
       </aside>
 
       {/* Main Content Area */}

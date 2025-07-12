@@ -4,91 +4,57 @@ import axios from "axios";
 import { AuthContext } from "../../LayOut/AuthContext";
 import Swal from "sweetalert2";
 import uploadToImgBB from "../UploadToImgBB";
+import useAxios from "../../Hook/useAxios";
 
 const Add_Donation = () => {
   const { user } = useContext(AuthContext);
+  const axiosSecure = useAxios();
+
   const [preview, setPreview] = useState(null);
   const { register, handleSubmit, reset } = useForm();
-  // const onSubmit = async (data) => {
-  //   const image = data.image[0];
-  //   if (!image) {
-  //     return Swal.fire({
-  //       icon: "warning",
-  //       title: "No Image Selected!",
-  //       text: "Please select an image to upload.",
-  //     });
-  //   }
+  const onSubmit = async (data) => {
+    const image = data.image[0];
+    if (!image) {
+      return Swal.fire({
+        icon: "warning",
+        title: "No Image Selected!",
+        text: "Please select an image to upload.",
+      });
+    }
 
-  //   const imageUrl = await uploadToImgBB(image);
-  //   if (!imageUrl) return;
+    const imageUrl = await uploadToImgBB(image);
+    if (!imageUrl) return;
 
-  //   const donationData = {
-  //     donationTitle: data.donationTitle,
-  //     foodType: data.foodType,
-  //     quantity: data.quantity,
-  //     pickupWindow: data.pickupWindow,
-  //     location: data.location,
-  //     restaurantName: user.displayName || "Unknown",
-  //     restaurantEmail: user.email || "Unknown",
-  //     image: imageUrl,
-  //   };
+    const donationData = {
+      donationTitle: data.donationTitle,
+      foodType: data.foodType,
+      quantity: data.quantity,
+      pickupWindow: data.pickupWindow,
+      location: data.location,
+      restaurantName: user.displayName || "Unknown",
+      restaurantEmail: user.email || "Unknown",
+      image: imageUrl,
+    };
 
-  //   try {
-  //     await axios.post("http://localhost:7000/api/donations", donationData);
-  //     Swal.fire({
-  //       icon: "success",
-  //       title: "Donation Submitted!",
-  //       text: "Your food donation has been successfully added.",
-  //     });
-  //     reset();
-  //     setPreview(null);
-  //   } catch (error) {
-  //     console.error("Submit error:", error);
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Submission Failed",
-  //       text: "Something went wrong. Please try again.",
-  //     });
-  //   }
-  // };
-const onSubmit = async (data) => {
-  const imageUrl = data.image;
-  if (!imageUrl) {
-    return Swal.fire({
-      icon: "warning",
-      title: "Image URL Required!",
-      text: "Please provide a valid image URL.",
-    });
-  }
-
-  const donationData = {
-    donationTitle: data.donationTitle,
-    foodType: data.foodType,
-    quantity: data.quantity,
-    pickupWindow: data.pickupWindow,
-    location: data.location,
-    restaurantName: user.displayName || "Unknown",
-    restaurantEmail: user.email || "Unknown",
-    image: imageUrl,
+    try {
+await axiosSecure.post("/api/donations", donationData);
+      Swal.fire({
+        icon: "success",
+        title: "Donation Submitted!",
+        text: "Your food donation has been successfully added.",
+      });
+      reset();
+      setPreview(null);
+    } catch (error) {
+      console.error("Submit error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text: "Something went wrong. Please try again.",
+      });
+    }
   };
 
-  try {
-    await axios.post("http://localhost:7000/api/donations", donationData);
-    Swal.fire({
-      icon: "success",
-      title: "Donation Submitted!",
-      text: "Your food donation has been successfully added.",
-    });
-    reset();
-  } catch (error) {
-    console.error("Submit error:", error);
-    Swal.fire({
-      icon: "error",
-      title: "Submission Failed",
-      text: "Something went wrong. Please try again.",
-    });
-  }
-};
 
   return (
     <div className="max-w-2xl mx-auto my-12 px-6 py-8 bg-[#fffaf5] dark:bg-[#2f2b28] rounded-3xl shadow-xl font-[Comfortaa]">
@@ -117,7 +83,7 @@ const onSubmit = async (data) => {
         ))}
 
         {/* Image Upload */}
-        {/* <div>
+        <div>
           <input
             type="file"
             accept="image/*"
@@ -132,13 +98,8 @@ const onSubmit = async (data) => {
               className="mt-4 mx-auto w-40 h-40 object-cover rounded-xl border-4 border-[#D4A373]"
             />
           )}
-        </div> */}
-        <input
-          type="url"
-          {...register("image", { required: true })}
-          placeholder="Enter image URL (e.g., https://example.com/image.jpg)"
-          className="w-full px-4 py-3 bg-white border border-[#ccc] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A373] text-black font-bold placeholder-gray-400"
-        />
+        </div>
+       
 
         {/* Restaurant Info (Read-only) */}
         <input

@@ -19,6 +19,12 @@ import Restaurant_Pro from "../Dashboard/Restaurant/Restaurant_Pro";
 import Add_Donation from "../Dashboard/Restaurant/Add_Donation";
 import My_Donations from "../Dashboard/Restaurant/My_Donations";
 import Requested_Donations from "../Dashboard/Restaurant/Requested_Donations";
+import CharityProfile from "../Dashboard/Charity/CharityProfile";
+import CharityRequests from "../Dashboard/Charity/CharityRequests";
+import MyPickups from "../Dashboard/Charity/MyPickups";
+import ReceivedDonati from "../Dashboard/Charity/ReceivedDonati";
+import Cha_transactionHistory from "../Dashboard/Charity/Cha_transactionHistory";
+import Payment from "../Dashboard/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -78,7 +84,7 @@ export const router = createBrowserRouter([
         path: "/alldonations",
         element: <Alldones />,
       },
-       {
+      {
         path: "/donatdetails",
         element: <DonatDetails />,
       },
@@ -105,37 +111,73 @@ export const router = createBrowserRouter([
         path: "overview",
         Component: Overview,
       },
-       {
-        path: "request_charity",
-        element: < Request_Charity/>,
+      {
+        path:'payment/:id',
+       element: <Payment/>,
       },
-       {
-        path: "favorites",
-        element: <Favorites/>,
-      },
-       {
-        path: "my-reviews",
-        element: <My_Reviews/>,
-      },
-       {
-        path: "transactions",
-        element: <Transaction_History/>,
-      },
-       {
+      //-----------------------resturant-----------------
+      {
         path: "resturent-profile",
-        element: <  Restaurant_Pro/>,
+        element: <Restaurant_Pro />,
       },
-       {
+      {
         path: "add-donation",
-        element: <Add_Donation/>,
+        element: <Add_Donation />,
       },
-       {
+      {
         path: "my-donation",
-        element: <My_Donations/>,
+        element: <My_Donations />,
       },
-       {
+      {
         path: "req-donation",
-        element: <Requested_Donations/>,
+        element: <Requested_Donations />,
+      },
+      ////-----------user------------
+      {
+        path: "request_charity",
+        element: <Request_Charity />,
+      },
+
+      {
+        path: "favorites",
+        element: <Favorites />,
+      },
+      {
+        path: "my-reviews",
+        element: <My_Reviews />,
+      },
+      {
+        path: "transactions",
+        element: <Transaction_History />,
+      },
+      //------charity------------------
+      {
+        path: "charity-profile",
+        element: <CharityProfile />,
+      },
+      {
+        path: "charityRequests",
+        element: <CharityRequests />,
+      },
+      {
+        path: "myPickups",
+        element: <MyPickups />,
+      },
+      {
+        path: "resi-donation",
+        element: <ReceivedDonati />,
+      },
+      {
+        path: "charity-profile",
+        element: <CharityProfile />,
+      },
+      {
+        path: "charityRequests",
+        element: <CharityRequests />,
+      },
+      {
+        path: "charity-transaction",
+        element: <Cha_transactionHistory />,
       },
     ],
   },

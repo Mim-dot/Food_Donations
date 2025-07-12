@@ -1,14 +1,18 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router"; 
+import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { AuthContext } from "../LayOut/AuthContext";
 import UploadToImgBB from "../Dashboard/UploadToImgBB";
 import axios from "axios";
+import useAxios from "../Hook/useAxios";
 
 const Register = () => {
-  const { createUser, setUser, updateUser, handleGoogle } = useContext(AuthContext);
+  const { createUser, setUser, updateUser, handleGoogle } =
+    useContext(AuthContext);
+  const axiosSecure = useAxios();
+
   const [error, setError] = useState("");
   const [photoFile, setPhotoFile] = useState(null);
   const [photoURL, setPhotoURL] = useState("");
@@ -49,34 +53,34 @@ const Register = () => {
       return;
     }
 
-  createUser(email, password)
-  .then((result) => {
-    const user = result.user;
-    updateUser({ displayName: name, photoURL }).then(() => {
-      setUser({ ...user, displayName: name, photoURL });
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        updateUser({ displayName: name, photoURL }).then(() => {
+          setUser({ ...user, displayName: name, photoURL });
 
-      // ✅ Add user to your database
-      const newUser = {
-        name,
-        email,
-        photoURL,
-        role: "User", // fixed role
-      };
+          // ✅ Add user to your database
+          const newUser = {
+            name,
+            email,
+            photoURL,
+            role: "User", // fixed role
+          };
 
-      axios.post("http://localhost:7000/users", newUser)
-        .then(() => {
-          toast.success("Registered and added to database!");
-          form.reset();
-          navigate(from);
-        })
-        .catch((err) => {
-          toast.error("Failed to save user in DB: " + err.message);
+          axiosSecure
+            .post("/users", newUser)
+            .then(() => {
+              toast.success("Registered and added to database!");
+              form.reset();
+              navigate(from);
+            })
+            .catch((err) => {
+              toast.error("Failed to save user in DB: " + err.message);
+            });
         });
-
-    });
-  })
-  .catch((err) => toast.error(err.message));
-}
+      })
+      .catch((err) => toast.error(err.message));
+  };
 
   const handleGoogleLogin = () => {
     handleGoogle()
@@ -135,26 +139,54 @@ const Register = () => {
             {error && <p className="text-sm text-red-500">{error}</p>}
 
             {/* Name Input */}
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
               <label className="block text-sm font-medium">Name</label>
               <input name="name" type="text" className="input-style" required />
             </motion.div>
 
             {/* Email Input */}
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
               <label className="block text-sm font-medium">Email</label>
-              <input name="email" type="email" className="input-style" required />
+              <input
+                name="email"
+                type="email"
+                className="input-style"
+                required
+              />
             </motion.div>
 
             {/* Password Input */}
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
               <label className="block text-sm font-medium">Password</label>
-              <input name="password" type="password" className="input-style" required />
+              <input
+                name="password"
+                type="password"
+                className="input-style"
+                required
+              />
             </motion.div>
 
             {/* Upload Profile Image */}
-            {/* <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
-              <label className="block text-sm font-medium">Upload Profile Photo</label>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <label className="block text-sm font-medium">
+                Upload Profile Photo
+              </label>
               <input
                 type="file"
                 accept="image/*"
@@ -169,26 +201,7 @@ const Register = () => {
                   className="w-20 h-20 mt-2 rounded-full border-2 border-orange-400"
                 />
               )}
-            </motion.div> */}
-<motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
-  <label className="block text-sm font-medium">Profile Photo URL</label>
-  <input
-    type="url"
-    placeholder="Enter image URL"
-    className="input-style"
-    value={photoURL}
-    onChange={(e) => setPhotoURL(e.target.value)}
-    required
-  />
-  {photoURL && (
-    <img
-      src={photoURL}
-      alt="Preview"
-      className="w-20 h-20 mt-2 rounded-full border-2 border-orange-400"
-      onError={(e) => { e.target.src = ""; /* fallback if broken link */ }}
-    />
-  )}
-</motion.div>
+            </motion.div>
 
             {/* Submit Button */}
             <motion.button
@@ -207,7 +220,11 @@ const Register = () => {
               whileTap={{ scale: 0.95 }}
             >
               <FcGoogle size={20} />
-              <button type="button" onClick={handleGoogleLogin} className="text-sm dark:text-white">
+              <button
+                type="button"
+                onClick={handleGoogleLogin}
+                className="text-sm dark:text-white"
+              >
                 Register with Google
               </button>
             </motion.div>
@@ -219,7 +236,10 @@ const Register = () => {
               transition={{ delay: 0.9 }}
             >
               Already have an account?{" "}
-              <Link to="/auth/login" className="text-orange-400 hover:underline">
+              <Link
+                to="/auth/login"
+                className="text-orange-400 hover:underline"
+              >
                 Login
               </Link>
             </motion.p>
