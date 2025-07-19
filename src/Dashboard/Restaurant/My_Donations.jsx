@@ -1,32 +1,30 @@
-import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import Lottie from "lottie-react";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../LayOut/AuthContext";
-import Update from "./Update";
-import useAxios from "../../Hook/useAxios";
-import AxiosSecure from "../../Hook/AxiosSecure";
+import loadingAnimation from "../../../src/assets/loadingAnimation.json";
+import Useable from "../../Useable";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
+import UpdateDonationForm from "../../From/UpdateDonationForm";
 
 const My_Donations = () => {
-  const { user } = useContext(AuthContext);
   const [donations, setDonations] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [editDonation, setEditDonation] = useState(null);
-  const navigate = useNavigate();
-  const axiosSecure = useAxios();
-const axiossecure = AxiosSecure(); 
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    if (!user?.email) return;
-
-    axiossecure.get(`/resturant/donations?email=${encodeURIComponent(user.email)}`)
-
+    axiosSecure
+      .get("/all/donations")
       .then((res) => setDonations(res.data))
-      .catch(console.error);
-  }, [user?.email]);
+      .catch((err) => console.error("Failed to load donations", err))
+      .finally(() => setLoading(false));
+  }, []);
+
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You won’t be able to revert this!",
+      text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#D33",
@@ -61,185 +59,103 @@ const axiossecure = AxiosSecure();
         d._id === updatedDonation._id ? updatedDonation : d
       )
     );
+    setEditDonation(null);
   };
 
-  if (donations.length === 0) {
+  if (loading) {
     return (
-      <p style={{ textAlign: "center", marginTop: 20, color: "#666" }}>
-        No donations added yet.
-      </p>
+      <div className="h-screen flex justify-center items-center bg-[#F5EFE6]">
+        <Lottie animationData={loadingAnimation} loop={true} className="w-60" />
+      </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: 900, margin: "2rem auto", padding: "0 1rem" }}>
-      <h2
-        style={{
-          textAlign: "center",
-          color: "#5D4636",
-          fontWeight: "700",
-          marginBottom: "1.5rem",
-        }}
-      >
-        📦 My Donations
-      </h2>
+    <section className="bg-[#F5EFE6] min-h-screen p-6">
+      {donations.length === 0 ? (
+        <Useable />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {donations.map((donation, index) => (
+            <motion.div
+              key={donation._id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="bg-white border border-[#E0D6CC] rounded-2xl p-5 shadow-lg hover:shadow-2xl transition-transform duration-300 ease-in-out transform hover:scale-[1.04] flex flex-col"
+            >
+              <img
+                src={donation.image || "https://via.placeholder.com/150"}
+                alt={donation.title}
+                className="w-full h-40 object-cover rounded-md mb-3"
+              />
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
-          gap: "1.5rem",
-        }}
-      >
-        {donations.map((donation) => (
-          <div
-            key={donation._id}
-            style={{
-              backgroundColor: "#FFF8F0",
-              borderRadius: 12,
-              boxShadow: "0 4px 12px rgba(212, 163, 115, 0.3)",
-              padding: "1rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              cursor: "default",
-            }}
-          >
-            <img
-              src={donation.imageUrl}
-              alt={donation.title}
-              style={{
-                width: "100%",
-                height: 140,
-                borderRadius: 8,
-                objectFit: "cover",
-                marginBottom: 12,
-              }}
-            />
-            <h3
-              style={{
-                color: "#6B4F3A",
-                fontWeight: "600",
-                marginBottom: 6,
-                fontSize: "1.2rem",
-                textAlign: "center",
-              }}
-            >
-              {donation.title}
-            </h3>
-            <p
-              style={{
-                margin: "4px 0",
-                color: "#8B6E4A",
-                fontWeight: "500",
-                width: "100%",
-                textAlign: "left",
-              }}
-            >
-              <strong>Food type:</strong> {donation.foodType}
-            </p>
-            <p
-              style={{
-                margin: "4px 0",
-                color: "#8B6E4A",
-                fontWeight: "500",
-                width: "100%",
-                textAlign: "left",
-              }}
-            >
-              <strong>Quantity:</strong> {donation.quantity}
-            </p>
-            <p
-              style={{
-                margin: "4px 0",
-                color: "#8B6E4A",
-                fontWeight: "500",
-                width: "100%",
-                textAlign: "left",
-              }}
-            >
-              <strong>Restaurant:</strong> {donation.restaurantName}
-            </p>
-            <p
-              style={{
-                margin: "8px 0",
-                fontWeight: "600",
-                width: "100%",
-                textAlign: "left",
-              }}
-            >
-              <strong>Status: </strong>
-              <span
-                style={{
-                  color:
+              <div className="flex-grow">
+                <h3 className="text-lg font-bold text-[#7B4F28] mb-1">
+                  {donation.title}
+                </h3>
+                <p className="text-sm text-[#5C3B1D] mb-1">
+                  <span className="font-semibold">Type:</span>{" "}
+                  {donation.foodType}
+                </p>
+                <p className="text-sm text-[#5C3B1D] mb-1">
+                  <span className="font-semibold">Quantity:</span>{" "}
+                  {donation.quantity}
+                </p>
+                <p className="text-sm text-[#5C3B1D] mb-1">
+                  <span className="font-semibold">Restaurant:</span>{" "}
+                  {donation.restaurantName}
+                </p>
+                <p
+                  className={`text-sm mb-3 font-semibold ${
                     donation.status === "Verified"
-                      ? "#2E7D32"
+                      ? "text-green-600"
                       : donation.status === "Rejected"
-                      ? "#C62828"
-                      : "#F9A825",
-                  fontWeight: "700",
-                }}
-              >
-                {donation.status}
-              </span>
-            </p>
-
-            <div
-              style={{
-                marginTop: "auto",
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                gap: "0.75rem",
-              }}
-            >
-              {donation.status !== "Rejected" && (
-                <button
-                  onClick={() => handleUpdate(donation)}
-                  style={{
-                    flex: 1,
-                    backgroundColor: "#D4A373",
-                    color: "#fff",
-                    border: "none",
-                    padding: "0.5rem 0",
-                    borderRadius: 8,
-                    fontWeight: "600",
-                    cursor: "pointer",
-                    transition: "background-color 0.3s ease",
-                  }}
+                      ? "text-red-600"
+                      : "text-yellow-600"
+                  }`}
                 >
-                  Update
-                </button>
-              )}
-              <button
-                onClick={() => handleDelete(donation._id)}
-                style={{
-                  flex: 1,
-                  backgroundColor: "#E57373",
-                  color: "#fff",
-                  border: "none",
-                  padding: "0.5rem 0",
-                  borderRadius: 8,
-                  fontWeight: "600",
-                  cursor: "pointer",
-                  transition: "background-color 0.3s ease",
-                }}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+                  Status: {donation.status}
+                </p>
+              </div>
 
-      {editDonation && (
-        <Update
-          donation={editDonation}
-          onClose={handleModalClose}
-          onUpdated={handleDonationUpdated}
-        />
+              <div className="flex justify-between mt-auto">
+                {donation.status !== "Rejected" && (
+                  <button
+                    onClick={() => handleUpdate(donation)}
+                    className="bg-blue-600 text-white px-4 py-2 text-sm rounded-xl hover:bg-blue-700 transition-colors duration-300 shadow-md hover:shadow-lg"
+                  >
+                    Update
+                  </button>
+                )}
+                <button
+                  onClick={() => handleDelete(donation._id)}
+                  className="bg-red-600 text-white px-4 py-2 text-sm rounded-xl hover:bg-red-700 transition-colors duration-300 shadow-md hover:shadow-lg"
+                >
+                  Delete
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       )}
-    </div>
+
+      {/* Update Donation Modal */}
+      {editDonation && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+            <h2 className="text-xl font-bold text-[#7B4F28] mb-4">
+              Update Donation
+            </h2>
+            <UpdateDonationForm
+              donation={editDonation}
+              onClose={handleModalClose}
+              onUpdate={handleDonationUpdated}
+            />
+          </div>
+        </div>
+      )}
+    </section>
   );
 };
 

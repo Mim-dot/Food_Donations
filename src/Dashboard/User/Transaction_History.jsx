@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import { AuthContext } from "../../LayOut/AuthContext";
-import AxiosSecure from "../../Hook/AxiosSecure";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
+import loadingAnimation from '../../assets/loadingAnimation.json'
+import Lottie from "lottie-react";
+
 
 const Transaction_History = () => {
   const { user } = useContext(AuthContext);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
- const axiosSecure = AxiosSecure();
+  const axiossecure = useAxiosSecure();
+
   useEffect(() => {
     if (!user?.email) return;
 
@@ -16,11 +19,11 @@ const Transaction_History = () => {
       try {
         setLoading(true);
         setError("");
-        
-       const response = await axiosSecure.get(
+
+        const response = await axiossecure.get(
           `/transactions?email=${encodeURIComponent(user.email)}`
         );
-        
+
         setTransactions(response.data);
       } catch (err) {
         console.error("Failed to fetch transactions:", err);
@@ -35,9 +38,8 @@ const Transaction_History = () => {
 
   if (loading) {
     return (
-      <div className="text-center py-8">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
-        <p className="mt-4">Loading transactions...</p>
+      <div className="h-screen flex justify-center items-center">
+        <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
       </div>
     );
   }

@@ -4,11 +4,11 @@ import axios from "axios";
 import { AuthContext } from "../../LayOut/AuthContext";
 import Swal from "sweetalert2";
 import uploadToImgBB from "../UploadToImgBB";
-import useAxios from "../../Hook/useAxios";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const Add_Donation = () => {
   const { user } = useContext(AuthContext);
-  const axiosSecure = useAxios();
+  const axiossecure = useAxiosSecure();
 
   const [preview, setPreview] = useState(null);
   const { register, handleSubmit, reset } = useForm();
@@ -37,7 +37,7 @@ const Add_Donation = () => {
     };
 
     try {
-await axiosSecure.post("/api/donations", donationData);
+await axiossecure.post("/api/donations", donationData);
       Swal.fire({
         icon: "success",
         title: "Donation Submitted!",

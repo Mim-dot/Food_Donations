@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../LayOut/AuthContext";
-import useAxios from "../../Hook/useAxios";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const Update = ({ donation, onClose, onUpdated }) => {
   const { user } = useContext(AuthContext);
-const axiosSecure = useAxios();
+const axiosSecure = useAxiosSecure();
 
   const [formData, setFormData] = useState({
     donationTitle: "",

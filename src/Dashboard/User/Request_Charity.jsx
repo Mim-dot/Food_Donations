@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import useAxios from "../../Hook/useAxios";
-import AxiosSecure from "../../Hook/AxiosSecure";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const Request_Charity = () => {
   const { user } = useContext(AuthContext);
@@ -16,7 +16,7 @@ const Request_Charity = () => {
   const [newRequestId, setNewRequestId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const axiosSecure = useAxios();
-  const axiossecure = AxiosSecure();
+  const axiossecure = useAxiosSecure();
 
   // Check for existing request when component mounts
   useEffect(() => {
@@ -73,6 +73,7 @@ const Request_Charity = () => {
 
       const payload = {
         email: user.email,
+        userName: user.displayName || user.name || "Unknown",
         organizationName: orgName.trim(),
         missionStatement: mission.trim(),
         transactionId: "pending",
@@ -81,7 +82,7 @@ const Request_Charity = () => {
         submittedAt: new Date(),
       };
 
-      const res = await axiosSecure.post("/charity", payload);
+      const res = await axiossecure.post("/charity", payload);
 
       if (res.data.insertedId) {
         Swal.fire({

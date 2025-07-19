@@ -22,18 +22,7 @@ const Restauran = () => {
           🏠 Home
         </NavLink>
         {/* 🍽️ Restaurant Profile */}
-        <NavLink
-          to="resturent-profile"
-          className={({ isActive }) =>
-            `${baseClasses} ${
-              isActive
-                ? "bg-[#D4A373] text-white"
-                : "hover:bg-[#F5EFE6] border border-[#E0D6CC]"
-            }`
-          }
-        >
-          🍽️ Restaurant Profile
-        </NavLink>
+      
 
         {/* ➕ Add Donation */}
         <NavLink
@@ -75,6 +64,18 @@ const Restauran = () => {
           }
         >
           📥 Requested Donations
+        </NavLink>
+          <NavLink
+          to="statistic"
+          className={({ isActive }) =>
+            `${baseClasses} ${
+              isActive
+                ? "bg-[#D4A373] text-white"
+                : "hover:bg-[#F5EFE6] border border-[#E0D6CC]"
+            }`
+          }
+        >
+         Donation Statistics Chart
         </NavLink>
       </nav>
     </div>

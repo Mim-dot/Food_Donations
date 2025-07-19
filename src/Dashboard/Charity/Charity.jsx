@@ -24,7 +24,7 @@ const Charity = () => {
           🏠 Home
         </NavLink>
         {/* 🍽️ Restaurant Profile */}
-        <NavLink
+        {/* <NavLink
           to="charity-profile"
           className={({ isActive }) =>
             `${baseClasses} ${
@@ -35,7 +35,7 @@ const Charity = () => {
           }
         >
          Charity Profile
-        </NavLink>
+        </NavLink> */}
 
         {/* ➕ Add Donation */}
         <NavLink

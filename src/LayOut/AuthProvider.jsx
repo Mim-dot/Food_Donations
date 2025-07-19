@@ -21,12 +21,18 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   // const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
-  
+
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const signIn = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+    return signInWithEmailAndPassword(auth, email, password).then(
+      async (result) => {
+        const token = await result.user.getIdToken();
+        localStorage.setItem("access-token", token);
+        return result;
+      }
+    );
   };
   const updateUser = async (updatedData) => {
     const currentUser = auth.currentUser;
@@ -46,23 +52,43 @@ const AuthProvider = ({ children }) => {
         const errorMessage = error.message;
       });
   };
+  // const handleGoogle = () => {
+  // return  signInWithPopup(auth, googleProvider)
+  //     .then((result) => {
+  //       toast.success("Google login successful!");
+  //        return result;
+  //     })
+  //     .catch((error) => {
+  //       toast.error("Google login failed: " + error.message);
+  //     });
+  // };
   const handleGoogle = () => {
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
+    return signInWithPopup(auth, googleProvider)
+      .then(async (result) => {
+        const token = await result.user.getIdToken();
+        localStorage.setItem("access-token", token);
         toast.success("Google login successful!");
+        return result;
       })
       .catch((error) => {
         toast.error("Google login failed: " + error.message);
+        throw error; // Important: re-throw the error to propagate it
       });
   };
-
   const logOut = () => {
+    localStorage.removeItem("access-token");
     return signOut(auth);
   };
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth , (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
       setUser(currentUser);
       setLoading(false);
+       if (currentUser) {
+        const token = await currentUser.getIdToken();
+        localStorage.setItem("access-token", token);
+      } else {
+        localStorage.removeItem("access-token");
+      }
     });
     return () => {
       unsubscribe();
@@ -82,9 +108,7 @@ const AuthProvider = ({ children }) => {
   };
   return (
     // <AuthContext.Provider value={authData}> {children}</AuthContext.Provider>
-    <AuthContext.Provider value={authData}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>
   );
 };
 

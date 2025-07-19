@@ -25,6 +25,17 @@ import MyPickups from "../Dashboard/Charity/MyPickups";
 import ReceivedDonati from "../Dashboard/Charity/ReceivedDonati";
 import Cha_transactionHistory from "../Dashboard/Charity/Cha_transactionHistory";
 import Payment from "../Dashboard/Payment";
+import FeatureDonations from "../Dashboard/Admin/FeatureDonations";
+import ManageDonations from "../Dashboard/Admin/ManageDonations";
+import ManageRequests from "../Dashboard/Admin/ManageRequests";
+import ManageRoleRequests from "../Dashboard/Admin/ManageRoleRequests";
+import ManageUsers from "../Dashboard/Admin/ManageUsers";
+import Forbidden from "../Component/Forbidden";
+import UserRoutes from "./UserRoutes";
+import CharityRoutes from "./CharityRoutes";
+import AdminRoutes from "./AdminRoutes";
+import ResturantRoutes from "./ResturantRoutes";
+import StatisticsChart from "../Dashboard/Restaurant/StatisticsChart";
 
 export const router = createBrowserRouter([
   {
@@ -85,12 +96,16 @@ export const router = createBrowserRouter([
         element: <Alldones />,
       },
       {
-        path: "/donatdetails",
+        path: "/donations/:id",
         element: <DonatDetails />,
       },
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/forbidden",
+        element: <Forbidden />,
       },
     ],
   },
@@ -112,73 +127,173 @@ export const router = createBrowserRouter([
         Component: Overview,
       },
       {
-        path:'payment/:id',
-       element: <Payment/>,
+        path: "payment/:id",
+        element: <Payment />,
       },
       //-----------------------resturant-----------------
       {
-        path: "resturent-profile",
-        element: <Restaurant_Pro />,
+        path: "restaurant-profile",
+        element: (
+          <ResturantRoutes>
+            {" "}
+            <Restaurant_Pro />
+          </ResturantRoutes>
+        ),
       },
       {
         path: "add-donation",
-        element: <Add_Donation />,
+        element: (
+          <ResturantRoutes>
+            <Add_Donation />
+          </ResturantRoutes>
+        ),
       },
       {
         path: "my-donation",
-        element: <My_Donations />,
+        element: (
+          <ResturantRoutes>
+            {" "}
+            <My_Donations />
+          </ResturantRoutes>
+        ),
       },
       {
         path: "req-donation",
-        element: <Requested_Donations />,
+        element: (
+          <ResturantRoutes>
+            <Requested_Donations />
+          </ResturantRoutes>
+        ),
+      },
+       {
+        path: "statistic",
+        element: (
+          <ResturantRoutes>
+            <StatisticsChart/>
+          </ResturantRoutes>
+        ),
       },
       ////-----------user------------
       {
         path: "request_charity",
-        element: <Request_Charity />,
+        element: (
+          <UserRoutes>
+            <Request_Charity />
+          </UserRoutes>
+        ),
       },
 
       {
         path: "favorites",
-        element: <Favorites />,
+        element: (
+          <UserRoutes>
+            <Favorites />
+          </UserRoutes>
+        ),
       },
       {
         path: "my-reviews",
-        element: <My_Reviews />,
+        element: (
+          <UserRoutes>
+            {" "}
+            <My_Reviews />
+          </UserRoutes>
+        ),
       },
       {
         path: "transactions",
-        element: <Transaction_History />,
+        element: (
+          <UserRoutes>
+            <Transaction_History />
+          </UserRoutes>
+        ),
       },
       //------charity------------------
       {
         path: "charity-profile",
-        element: <CharityProfile />,
+        element: (
+          <CharityRoutes>
+            <CharityProfile />
+          </CharityRoutes>
+        ),
       },
       {
         path: "charityRequests",
-        element: <CharityRequests />,
+        element: (
+          <CharityRoutes>
+            <CharityRequests />
+          </CharityRoutes>
+        ),
       },
       {
         path: "myPickups",
-        element: <MyPickups />,
+        element: (
+          <CharityRoutes>
+            <MyPickups />
+          </CharityRoutes>
+        ),
       },
       {
         path: "resi-donation",
-        element: <ReceivedDonati />,
-      },
-      {
-        path: "charity-profile",
-        element: <CharityProfile />,
-      },
-      {
-        path: "charityRequests",
-        element: <CharityRequests />,
+        element: (
+          <CharityRoutes>
+            <ReceivedDonati />
+          </CharityRoutes>
+        ),
       },
       {
         path: "charity-transaction",
-        element: <Cha_transactionHistory />,
+        element: (
+          <CharityRoutes>
+            <Cha_transactionHistory />
+          </CharityRoutes>
+        ),
       },
+      //----------admin----------------
+      {
+        path: "featureDonations",
+        element: (
+          <AdminRoutes>
+            <FeatureDonations />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "manageDonations",
+        element: (
+          <AdminRoutes>
+            <ManageDonations />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "manageRequests",
+        element: (
+          <AdminRoutes>
+            <ManageRequests />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "manageRoleRequests",
+        element: (
+          <AdminRoutes>
+            <ManageRoleRequests />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "manageUsers",
+        element: (
+          <AdminRoutes>
+            <ManageUsers />
+          </AdminRoutes>
+        ),
+      },
+      //  {
+      //   path: "makeadmin",
+      //   element: <MakeAdmin />,
+      // },
     ],
   },
 ]);

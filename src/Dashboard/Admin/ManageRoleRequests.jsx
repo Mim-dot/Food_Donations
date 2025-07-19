@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAxios from "../../Hook/useAxios";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
+import loadingAnimation from '../../assets/loadingAnimation.json'
+import Lottie from "lottie-react";
 
 const ManageRoleRequests = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const axiosSecure = useAxios();
+  const axiossecure = useAxiosSecure();
 
-  // Fetch requests from API
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const res = await axios.get("/api/charity-role-requests");
+        const res = await axiossecure.get("/admin/charity-requests");
         setRequests(res.data);
       } catch (err) {
         console.error(err);
@@ -23,93 +28,165 @@ const ManageRoleRequests = () => {
     fetchRequests();
   }, []);
 
-  // Update status handler
   const updateStatus = async (id, newStatus) => {
     try {
-      // Optionally, call backend API to update status
-      await axios.patch(`/api/charity-role-requests/${id}`, { status: newStatus });
+      setLoading(true);
+      const result = await axiosSecure.patch(`/admin/charity-requests/${id}`, {
+        status: newStatus,
+      });
 
-      // Update UI
-      setRequests((prev) =>
-        prev.map((req) => (req._id === id ? { ...req, status: newStatus } : req))
-      );
+      if (result.data.success) {
+        setRequests((prev) =>
+          prev.map((req) =>
+            req._id === id ? { ...req, status: newStatus } : req
+          )
+        );
 
-      Swal.fire("Success", `Request ${newStatus.toLowerCase()} successfully.`, "success");
+        const action = newStatus.toLowerCase();
+        let message = `Request ${action} successfully`;
+
+        if (newStatus === "Approved") {
+          const updatedRequest = requests.find((req) => req._id === id);
+          if (updatedRequest) {
+            message = `${updatedRequest.userEmail} is now a charity`;
+          }
+        }
+
+        Swal.fire({
+          title: "Success",
+          text: message,
+          icon: "success",
+          timer: 2000,
+        });
+      }
     } catch (err) {
-      console.error(err);
-      Swal.fire("Error", `Failed to update status to ${newStatus}`, "error");
+      console.error("Update error:", err);
+
+      let errorMessage = "Failed to update request";
+      if (err.response) {
+        // Handle specific error cases
+        if (err.response.status === 400) {
+          errorMessage = err.response.data.message || "Invalid request";
+        } else if (err.response.status === 403) {
+          errorMessage = "Admin access required";
+        } else if (err.response.status === 404) {
+          errorMessage = err.response.data.message || "Request not found";
+        } else {
+          errorMessage = err.response.data.message || "Server error";
+        }
+      }
+
+      Swal.fire({
+        title: "Error",
+        text: errorMessage,
+        icon: "error",
+        timer: 3000,
+      });
+    } finally {
+      setLoading(false);
     }
   };
-
-  if (loading) return <p>Loading requests...</p>;
-
+  if (loading) return;
+  <div className="h-screen flex justify-center items-center">
+    <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
+  </div>;
   return (
-    <div className="overflow-x-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">Charity Role Requests</h2>
-      <table className="min-w-full border border-gray-300 rounded-md">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="border px-4 py-2">User Name</th>
-            <th className="border px-4 py-2">User Email</th>
-            <th className="border px-4 py-2">Organization Name</th>
-            <th className="border px-4 py-2">Mission Statement</th>
-            <th className="border px-4 py-2">Transaction ID</th>
-            <th className="border px-4 py-2">Status</th>
-            <th className="border px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {requests.length === 0 ? (
-            <tr>
-              <td colSpan={7} className="text-center p-4">
-                No requests found.
-              </td>
-            </tr>
-          ) : (
-            requests.map((req) => (
-              <tr key={req._id} className="even:bg-gray-50">
-                <td className="border px-4 py-2">{req.userName}</td>
-                <td className="border px-4 py-2">{req.userEmail}</td>
-                <td className="border px-4 py-2">{req.organizationName}</td>
-                <td className="border px-4 py-2 max-w-xs truncate" title={req.mission}>
-                  {req.mission}
-                </td>
-                <td className="border px-4 py-2">{req.transactionId}</td>
-                <td className="border px-4 py-2 font-semibold">
-                  <span
-                    className={`px-2 py-1 rounded text-white ${
-                      req.status === "Approved"
-                        ? "bg-green-600"
-                        : req.status === "Rejected"
-                        ? "bg-red-600"
-                        : "bg-yellow-600"
-                    }`}
-                  >
-                    {req.status}
-                  </span>
-                </td>
-                <td className="border px-4 py-2 space-x-2">
-                  <button
-                    disabled={req.status === "Approved"}
-                    onClick={() => updateStatus(req._id, "Approved")}
-                    className={`px-3 py-1 rounded bg-green-500 text-white hover:bg-green-600 disabled:opacity-50`}
-                  >
-                    Approve
-                  </button>
-                  <button
-                    disabled={req.status === "Rejected"}
-                    onClick={() => updateStatus(req._id, "Rejected")}
-                    className={`px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600 disabled:opacity-50`}
-                  >
-                    Reject
-                  </button>
-                </td>
+    <section>
+      <div className="container mx-auto p-4">
+        <h2 className="text-2xl font-bold mb-6 text-center sm:text-left">
+          Charity Role Requests
+        </h2>
+
+        <div className="w-full overflow-x-auto rounded-lg shadow ring-1 ring-gray-200">
+          <table className="w-full table-auto divide-y divide-gray-200">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  Email
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  Organization
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  Mission
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  Transaction ID
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  Status
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  Actions
+                </th>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-    </div>
+            </thead>
+
+            <tbody className="divide-y divide-gray-100">
+              {requests.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={7}
+                    className="px-4 py-6 text-center text-sm text-gray-500"
+                  >
+                    No pending requests found.
+                  </td>
+                </tr>
+              ) : (
+                requests.map((req) => (
+                  <tr key={req._id}>
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      {req.userEmail}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      {req.organizationName}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600 max-w-[200px] truncate">
+                      {req.missionStatement}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      {req.transactionId}
+                    </td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={`px-2 py-1 text-xs font-semibold rounded-full 
+                  ${
+                    req.status === "Approved"
+                      ? "bg-green-100 text-green-700"
+                      : req.status === "Rejected"
+                      ? "bg-red-100 text-red-700"
+                      : "bg-yellow-100 text-yellow-700"
+                  }`}
+                      >
+                        {req.status}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 space-x-2">
+                      {req.status !== "Approved" && (
+                        <button
+                          onClick={() => updateStatus(req._id, "Approved")}
+                          className="text-green-600 hover:underline"
+                        >
+                          Approve
+                        </button>
+                      )}
+                      {req.status !== "Rejected" && (
+                        <button
+                          onClick={() => updateStatus(req._id, "Rejected")}
+                          className="text-red-600 hover:underline"
+                        >
+                          Reject
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   );
 };
 

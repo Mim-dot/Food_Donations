@@ -5,7 +5,9 @@ import { useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 import axios from "axios";
 import useAxios from "../Hook/useAxios";
-import AxiosSecure from "../Hook/AxiosSecure";
+import useAxiosSecure from "../Hook/useAxiosSecure";
+import loadingAnimation from '../assets/loadingAnimation.json'
+import Lottie from "lottie-react";
 
 const PaymentForm = () => {
   const stripe = useStripe();
@@ -14,7 +16,7 @@ const PaymentForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const axiosSecure = useAxios();
-  const axiossecure = AxiosSecure();
+  const axiossecure = useAxiosSecure();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [charityRequest, setCharityRequest] = useState(null);
@@ -120,8 +122,11 @@ const PaymentForm = () => {
   };
 
   if (!charityRequest) {
-    return <div className="text-center py-8">Loading payment details...</div>;
-  }
+    return (
+ <div className="h-screen flex justify-center items-center">
+        <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
+      </div>
+)  }
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded shadow">

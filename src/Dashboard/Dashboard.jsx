@@ -5,11 +5,11 @@ import ProfileDes from "./User/ProfileDes";
 import Restauran from "./Restaurant/Restauran";
 import Charity from "./Charity/Charity";
 import Admin from "./Admin/Admin";
+import useCheckRole from "../Hook/useCheckRole";
 
 const Dashboard = () => {
-
   const location = useLocation();
-
+ const {role,loading}=useCheckRole()
   const isActive = (path) => location.pathname === path;
 
   return (
@@ -17,17 +17,17 @@ const Dashboard = () => {
       {/* Sidebar */}
       <aside className="w-full md:w-72 bg-white rounded-2xl shadow-xl border border-[#E0D6CC] p-6 md:p-8 flex flex-col items-center space-y-6">
         {/* Profile Picture */}
-       <ProfileDes/>
+        <ProfileDes />
 
         {/* Navigation Links */}
-        <User/>
-        <Restauran/>
-        <Charity/>
-        <Admin/>
+        {role === "user" && <User />}
+        {role === "restaurant" && <Restauran />}
+        {role === "charity" && <Charity />}
+        {role === "admin" && <Admin />}
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 bg-white rounded-2xl shadow-lg border border-[#E0D6CC] p-6 md:p-10">
+      <main className="flex-1 bg-white rounded-2xl shadow-lg border border-[#E0D6CC] p-2 md:p-2">
         <Outlet />
       </main>
     </div>
