@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import useAxios from "../../Hook/useAxios";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const CharityRequestsTable = () => {
   const [requests, setRequests] = useState([]);
   const axiosSecure = useAxios();
+  const axiossecure = useAxiosSecure();
 
   useEffect(() => {
     fetchRequests();
@@ -13,7 +15,7 @@ const CharityRequestsTable = () => {
 
   const fetchRequests = async () => {
     try {
-      const res = await axiosSecure.get("/api/charity-requests");
+      const res = await axiossecure.get("/api/charity-requests");
       if (Array.isArray(res.data)) {
         setRequests(res.data);
       } else {
