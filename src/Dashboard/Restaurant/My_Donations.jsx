@@ -72,7 +72,7 @@ const My_Donations = () => {
 
   return (
     <section className="bg-[#F5EFE6] min-h-screen p-6">
-      {donations.length === 0 ? (
+      {donations.length ===  ? (
         <Useable />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
