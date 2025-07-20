@@ -26,7 +26,7 @@ const CharityRequests = () => {
               key={idx}
               className="bg-[#F5EFE6] border border-[#E0D6CC] rounded-2xl p-6 shadow-sm hover:shadow-md transition duration-300"
             >
-              <div className="flex items-center gap-4 mb-4">
+              {/* <div className="flex items-center gap-4 mb-4">
                 <img
                   src={
                      req.photoURL ||
@@ -38,7 +38,7 @@ const CharityRequests = () => {
                 <h3 className="text-lg font-semibold text-[#7B4F28]">
                   {req.organizationName}
                 </h3>
-              </div>
+              </div> */}
               <p className="text-sm text-[#5C3B1D] mb-3 line-clamp-3 italic">
                 {req.missionStatement}
               </p>
@@ -46,7 +46,7 @@ const CharityRequests = () => {
                 Submitted: {new Date(req.submittedAt).toLocaleDateString()}
               </div>
               <div className="text-sm font-medium mt-3 text-[#7B4F28]">
-                🍽️ Food Needed: <span className="font-bold">Awaiting Donation</span>
+                🍽️ Organization Name: <span className="font-bold">   {req.organizationName}</span>
               </div>
             </div>
           ))}
