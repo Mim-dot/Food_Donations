@@ -6,7 +6,7 @@ import useAxiosSecure from "../Hook/useAxiosSecure";
 const UpdateDonationForm = ({ donation, onClose, onUpdate }) => {
   const axiosSecure = useAxiosSecure();
   const [formData, setFormData] = useState({
-    title: donation.title,
+    title: donation.donationTitle,
     foodType: donation.foodType,
     quantity: donation.quantity,
     description: donation.description,
@@ -14,7 +14,7 @@ const UpdateDonationForm = ({ donation, onClose, onUpdate }) => {
     pickupTime: donation.pickupTime,
     expiryDate: donation.expiryDate,
     restaurantName: donation.restaurantName,
-    restaurantLocation: donation.restaurantLocation,
+    restaurantLocation: donation.location,
   });
   const [loading, setLoading] = useState(false);
 
@@ -70,9 +70,7 @@ const UpdateDonationForm = ({ donation, onClose, onUpdate }) => {
   };
 
   return (
-    <div
-      className="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg border border-gray-100 h-[70vh] md:h-[75vh] flex flex-col"
-    >
+    <div className="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg border border-gray-100 h-[70vh] md:h-[75vh] flex flex-col">
       <form
         onSubmit={handleSubmit}
         className="overflow-y-auto pr-3 space-y-4 flex-1"
