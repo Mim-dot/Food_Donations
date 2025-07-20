@@ -66,10 +66,10 @@ const Login = () => {
             transition={{ delay: 0.4 }}
             className="sm:my-6 text-4xl text-amber-600 font-bold mb-4"
           >
-            Welcome to Lilo
+            Welcome to ShareBite
           </motion.h1>
           <p className="login-p text-lg text-black max-w-sm mx-auto md:mx-0">
-            Connect with freelancers. Get your tasks done quickly & easily. Log in to get started.
+            Connect with Food Donation. Get your tasks done quickly & easily. Log in to get started.
           </p>
         </motion.div>
 
