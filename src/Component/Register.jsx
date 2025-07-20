@@ -46,6 +46,8 @@ const Register = () => {
 
     // Validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const hasCapitalLetter = /[A-Z]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
     if (!emailRegex.test(email)) {
       toast.error("Please enter a valid email address");
       return;
@@ -55,7 +57,15 @@ const Register = () => {
       toast.error("Password must be at least 6 characters");
       return;
     }
+    if (!hasCapitalLetter) {
+      toast.error("Password must include at least one capital letter");
+      return;
+    }
 
+    if (!hasSpecialChar) {
+      toast.error("Password must include at least one special character");
+      return;
+    }
     if (!photoURL) {
       toast.error("Please upload a profile photo");
       return;
@@ -158,7 +168,7 @@ const Register = () => {
           transition={{ duration: 0.7 }}
           className="sm:my-6 text-center md:text-left text-black dark:text-white"
         >
-          <h1 className="text-4xl font-bold mb-3">Join  ShareBite</h1>
+          <h1 className="text-4xl font-bold mb-3">Join ShareBite</h1>
           <p className="text-lg text-gray-700 dark:text-gray-300 max-w-sm mx-auto md:mx-0">
             Create your account to connect with the community and make a
             difference.
