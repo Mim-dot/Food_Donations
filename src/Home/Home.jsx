@@ -4,6 +4,7 @@ import Banner from './Banner';
 import CharityRequests from './CharityRequests';
 import VolunteerOpportunities from './VolunteerOpportunities';
 import FoodSafetyGuidelines from './FoodSafetyGuidelines';
+import CommunityStories from './CommunityStories';
 
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
           <FeaturedDonations/> 
           <CharityRequests/> 
           <VolunteerOpportunities/>
+          <CommunityStories/>
           <FoodSafetyGuidelines/>
         </div>
     );

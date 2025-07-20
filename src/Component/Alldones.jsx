@@ -112,7 +112,7 @@ const Alldones = () => {
               </p>
               <p className="text-sm text-gray-700">
                 ❤️ <strong>Charity:</strong>{" "}
-                {donation.charityName || (
+                {donation.organizationName || (
                   <span className="text-gray-400">Not assigned</span>
                 )}
               </p>
