@@ -122,7 +122,7 @@ const FeatureDonations = () => {
                   />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {donation.title || "Untitled Donation"}
+                  {donation.donationTitle || "Untitled Donation"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {donation.foodType || "N/A"}

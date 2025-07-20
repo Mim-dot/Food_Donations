@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAxios from "../../Hook/useAxios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -17,7 +17,9 @@ const ManageUsers = () => {
   const queryClient = useQueryClient();
   const axiossecure = useAxiosSecure();
   const axiosSecure = useAxios();
-
+ useEffect(() => {
+     document.title = "Manage Users";
+   }, []);
   // All users fetch
   const {
     data: allUsers = [],

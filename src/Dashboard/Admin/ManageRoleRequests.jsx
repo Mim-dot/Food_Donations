@@ -11,7 +11,9 @@ const ManageRoleRequests = () => {
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxios();
   const axiossecure = useAxiosSecure();
-
+ useEffect(() => {
+    document.title = "Manage Role Requests";
+  }, []);
   useEffect(() => {
     const fetchRequests = async () => {
       try {

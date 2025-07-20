@@ -7,7 +7,9 @@ const UpdateDonationForm = ({ donation, onClose, onUpdate }) => {
   const axiosSecure = useAxiosSecure();
   const [formData, setFormData] = useState({
     title: donation.donationTitle,
-    foodType: donation.foodType,
+    foodType: donation.
+foodType
+,
     quantity: donation.quantity,
     description: donation.description,
     image: donation.image,

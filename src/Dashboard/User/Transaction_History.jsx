@@ -11,7 +11,9 @@ const Transaction_History = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const axiossecure = useAxiosSecure();
-
+ useEffect(() => {
+     document.title = "Transaction_History";
+   }, []);
   useEffect(() => {
     if (!user?.email) return;
 

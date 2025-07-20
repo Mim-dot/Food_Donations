@@ -14,7 +14,9 @@ const My_Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxios();
-
+ useEffect(() => {
+    document.title = "My_Reviews";
+  }, []);
   useEffect(() => {
     if (!user?.email) {
       setReviews([]);
@@ -131,7 +133,7 @@ const My_Reviews = () => {
                 textTransform: "capitalize",
               }}
             >
-              {review.donationInfo?.title || "No title"}
+              {review.donationInfo?.donationTitle || "No title"}
             </h3>
             <p
               style={{

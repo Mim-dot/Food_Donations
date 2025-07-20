@@ -9,7 +9,9 @@ const ProfileDes = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const axiossecure = useAxiosSecure();
-
+useEffect(() => {
+    document.title = "Profile";
+  }, []);
   useEffect(() => {
     const fetchUserData = async () => {
       if (authUser) {

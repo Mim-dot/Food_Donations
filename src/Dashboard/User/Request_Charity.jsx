@@ -17,7 +17,9 @@ const Request_Charity = () => {
   const [isLoading, setIsLoading] = useState(false);
   const axiosSecure = useAxios();
   const axiossecure = useAxiosSecure();
-
+useEffect(() => {
+    document.title = "Request Charity";
+  }, []);
   // Check for existing request when component mounts
   useEffect(() => {
     const checkExistingRequest = async () => {

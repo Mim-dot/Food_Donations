@@ -16,7 +16,9 @@ const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [removingId, setRemovingId] = useState(null);
-
+useEffect(() => {
+    document.title = "Favorites";
+  }, []);
   useEffect(() => {
     if (!user?.email) return;
 
