@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Lottie from "lottie-react";
 import { Link } from "react-router";
 import error from "../assets/error.json";
 const Error = () => {
+  useEffect(() => {
+    document.title = "ERROR";
+  }, []);
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-white text-[#7B4F28] font-[Comfortaa] px-4">
       <div className="max-w-md w-full">

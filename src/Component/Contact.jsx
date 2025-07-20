@@ -1,9 +1,12 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 const Contact = () => {
+  useEffect(() => {
+    document.title = "Contact";
+  }, []);
   const formRef = useRef();
 
   const sendEmail = (e) => {

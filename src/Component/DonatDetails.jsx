@@ -12,6 +12,7 @@ import useCheckRole from "../Hook/useCheckRole";
 import Lottie from "lottie-react";
 
 const DonatDetails = () => {
+
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
@@ -21,7 +22,9 @@ const DonatDetails = () => {
   const [pickupTime, setPickupTime] = useState("");
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviews, setReviews] = useState([]);
-
+useEffect(() => {
+    document.title = "Donation Details";
+  }, []);
   // Fetch donation data
   useEffect(() => {
     axiosSecure

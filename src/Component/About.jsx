@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const About = () => {
+  useEffect(() => {
+    document.title = "About";
+  }, []);
   return (
     <div className="min-h-screen bg-[#F5EFE6] text-[#5C3B1D] py-12 px-6 font-[Comfortaa] mt-4">
       <div className="max-w-5xl mx-auto text-center">

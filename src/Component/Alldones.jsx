@@ -13,7 +13,9 @@ const Alldones = () => {
   const [loadingDonations, setLoadingDonations] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("");
-
+ useEffect(() => {
+    document.title = "All Donation";
+  }, []);
   useEffect(() => {
     if (!loading && user) {
       axiosSecure
