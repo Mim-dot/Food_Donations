@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router";
 import User from "./User/User";
 import ProfileDes from "./User/ProfileDes";
@@ -11,6 +11,9 @@ const Dashboard = () => {
   const location = useLocation();
  const {role,loading}=useCheckRole()
   const isActive = (path) => location.pathname === path;
+useEffect(() => {
+    document.title = "Dashboard";
+  }, []);
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-[#F5EFE6] p-4 md:p-6 gap-4">

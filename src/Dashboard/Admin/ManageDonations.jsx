@@ -6,12 +6,15 @@ import useAxios from '../../Hook/useAxios';
 import loadingAnimation from '../../assets/loadingAnimation.json'
 import Lottie from 'lottie-react';
 import Useable from '../../Useable';
+import { useEffect } from 'react';
 
 const ManageDonations = () => {
   const queryClient = useQueryClient();
   const axiossecure = useAxiosSecure();
   const axiosSecure = useAxios();
-
+  useEffect(() => {
+     document.title = " Manage Donations";
+   }, []);
   const { 
     data: donations = [], 
     isLoading, 

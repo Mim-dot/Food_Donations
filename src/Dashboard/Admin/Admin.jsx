@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router"; // keep this corrected
 
 const Admin = () => {
    const baseClasses =
     "py-3 rounded-lg font-semibold text-[#5C3B1D] shadow-md text-center transition";
+ useEffect(() => {
+    document.title = "Admin";
+  }, []);
 
   return (
     <div className="p-6 bg-white dark:bg-gray-900 rounded-lg shadow-md">

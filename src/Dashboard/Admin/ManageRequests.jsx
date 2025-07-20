@@ -8,7 +8,9 @@ const CharityRequestsTable = () => {
   const [requests, setRequests] = useState([]);
   const axiosSecure = useAxios();
   const axiossecure = useAxiosSecure();
-
+  useEffect(() => {
+    document.title = "Manage Request";
+  }, []);
   useEffect(() => {
     fetchRequests();
   }, []);
