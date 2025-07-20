@@ -7,7 +7,7 @@ const useAxiosSecure = () => {
   //console.log("user in useAxiosSecure:", user);
 
   const axiosInstance = axios.create({
-    baseURL: "http://localhost:7000",
+    baseURL: "https://my-final-project-server.vercel.app",
   });
 
   axiosInstance.interceptors.request.use((config) => {

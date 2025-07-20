@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import useAxios from "../Hook/useAxios";
 import useAxiosSecure from "../Hook/useAxiosSecure";
-import loadingAnimation from '../assets/loadingAnimation.json'
+import loadingAnimation from "../assets/loadingAnimation.json";
 import Lottie from "lottie-react";
 
 const PaymentForm = () => {
@@ -54,7 +54,7 @@ const PaymentForm = () => {
     try {
       // Step 1: Create payment intent
       const paymentIntentRes = await axiosSecure.post(
-        "http://localhost:7000/create-payment-intent",
+        "https://my-final-project-server.vercel.app/create-payment-intent",
         { amountInCents, id }
       );
       const clientSecret = paymentIntentRes.data.clientSecret;
@@ -123,10 +123,11 @@ const PaymentForm = () => {
 
   if (!charityRequest) {
     return (
- <div className="h-screen flex justify-center items-center">
+      <div className="h-screen flex justify-center items-center">
         <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
       </div>
-)  }
+    );
+  }
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded shadow">

@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: `http://localhost:7000`
-})
+  baseURL: `https://my-final-project-server.vercel.app`,
+});
 
 const useAxios = () => {
-    return axiosInstance;
+  return axiosInstance;
 };
 
 export default useAxios;
