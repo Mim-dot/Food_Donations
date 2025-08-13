@@ -30,9 +30,7 @@ const Cha_transactionHistory = () => {
         Charity Role Transaction History
       </h2>
       {transactions.length === 0 ? (
-       
-          <Useable />
-       
+        <Useable />
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full border border-gray-200">
@@ -50,10 +48,11 @@ const Cha_transactionHistory = () => {
                   <td className="py-2 px-4 border">{tx.transactionId}</td>
                   <td className="py-2 px-4 border">${tx.amount}</td>
                   <td className="py-2 px-4 border">
-                    {tx.charityRequest?.submittedAt
-                      ? new Date(tx.charityRequest.submittedAt).toLocaleString()
+                    {tx?.charityRequest?.paid_at
+                      ? new Date(tx.charityRequest.paid_at).toLocaleString()
                       : "N/A"}
                   </td>
+
                   <td className="py-2 px-4 border">
                     <span
                       className={`px-2 py-1 rounded-full text-sm ${

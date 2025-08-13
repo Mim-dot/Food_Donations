@@ -15,8 +15,10 @@ const useCheckRole = () => {
       if (!authLoading && user?.email) {
         try {
           const encodedEmail = encodeURIComponent(user.email);
-          const response = await axiossecure.get(`/api/users/${encodedEmail}/role`);
-          
+          const response = await axiossecure.get(
+            `/api/users/${encodedEmail}/role`
+          );
+
           if (response.data?.role) {
             setRole(response.data.role);
           } else {
@@ -24,7 +26,10 @@ const useCheckRole = () => {
             setRole("user");
           }
         } catch (error) {
-          console.error("Role check failed:", error.response?.data || error.message);
+          console.error(
+            "Role check failed:",
+            error.response?.data || error.message
+          );
           setRole("user"); // Default fallback
         } finally {
           setIsRoleLoader(false);

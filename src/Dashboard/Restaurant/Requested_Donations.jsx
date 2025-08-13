@@ -4,14 +4,16 @@ import useAxios from "../../Hook/useAxios"; // your axios instance with auth etc
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const Requested_Donations = () => {
   const axiosSecure = useAxios();
+  const axiossecure = useAxiosSecure();
   const [requests, setRequests] = useState([]);
 
   const fetchRequests = async () => {
     try {
-      const res = await axiosSecure.get("/api/donation-requests");
+      const res = await axiossecure.get("/api/donation-requests");
       setRequests(res.data);
     } catch (err) {
       console.error("Failed to fetch donation requests", err);
@@ -21,7 +23,7 @@ const Requested_Donations = () => {
 
   const handleAction = async (requestId, donationId, action) => {
     try {
-      await axiosSecure.patch(`/api/donation-requests/${requestId}`, {
+      await axiossecure.patch(`/api/donation-requests/${requestId}`, {
         action,
         donationId,
       });
@@ -60,14 +62,18 @@ const Requested_Donations = () => {
               <th className="py-3 px-4 text-left text-sm font-semibold">
                 Charity Name
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold">Email</th>
+              <th className="py-3 px-4 text-left text-sm font-semibold">
+                Email
+              </th>
               <th className="py-3 px-4 text-left text-sm font-semibold">
                 Description
               </th>
               <th className="py-3 px-4 text-left text-sm font-semibold">
                 Pickup Time
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold">Status</th>
+              <th className="py-3 px-4 text-left text-sm font-semibold">
+                Status
+              </th>
               <th className="py-3 px-4 text-center text-sm font-semibold">
                 Actions
               </th>

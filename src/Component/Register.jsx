@@ -268,7 +268,7 @@ const Register = () => {
                 type="file"
                 accept="image/*"
                 onChange={handlePhotoUpload}
-                className="input-style border border-[#E0D6CC] text-[#5C3B1D]"
+                className="input-style border border-[#E0D6CC] text-[#5C3B1D] cursor-pointer"
                 required
               />
               {photoURL && (

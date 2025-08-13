@@ -37,7 +37,7 @@ const Add_Donation = () => {
     };
 
     try {
-await axiossecure.post("/api/donations", donationData);
+      await axiossecure.post("/api/donations", donationData);
       Swal.fire({
         icon: "success",
         title: "Donation Submitted!",
@@ -54,7 +54,6 @@ await axiossecure.post("/api/donations", donationData);
       });
     }
   };
-
 
   return (
     <div className="max-w-2xl mx-auto my-12 px-6 py-8 bg-[#fffaf5] dark:bg-[#2f2b28] rounded-3xl shadow-xl font-[Comfortaa]">
@@ -89,7 +88,7 @@ await axiossecure.post("/api/donations", donationData);
             accept="image/*"
             {...register("image")}
             onChange={(e) => setPreview(URL.createObjectURL(e.target.files[0]))}
-            className="w-full file:px-4 file:py-2 file:rounded-lg file:border-none file:bg-[#D4A373] file:text-white hover:file:bg-[#bb8859] bg-white border border-[#ccc]  rounded-lg text-black font-bold"
+            className="cursor-pointer w-full file:px-4 file:py-2 file:rounded-lg file:border-none file:bg-[#D4A373] file:text-white hover:file:bg-[#bb8859] bg-white border border-[#ccc]  rounded-lg text-black font-bold"
           />
           {preview && (
             <img
@@ -99,7 +98,6 @@ await axiossecure.post("/api/donations", donationData);
             />
           )}
         </div>
-       
 
         {/* Restaurant Info (Read-only) */}
         <input
@@ -116,7 +114,7 @@ await axiossecure.post("/api/donations", donationData);
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-[#7B4F28] text-white font-semibold text-lg hover:bg-[#a0693c] transition-all dark:bg-orange-500 dark:hover:bg-orange-400"
+          className="w-full py-3 rounded-lg bg-[#7B4F28] text-white font-semibold text-lg hover:bg-[#a0693c] transition-all dark:bg-orange-500 dark:hover:bg-orange-400 cursor-pointer"
         >
           ➕ Submit Donation
         </button>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import useAxiosSecure from "../Hook/useAxiosSecure";
 import { AuthContext } from "../LayOut/AuthContext";
 import Useable from "../Useable";
-import loadingAnimation from '../assets/loadingAnimation.json'
+import loadingAnimation from "../assets/loadingAnimation.json";
 import Lottie from "lottie-react";
 const Alldones = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,7 +13,7 @@ const Alldones = () => {
   const [loadingDonations, setLoadingDonations] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("");
- useEffect(() => {
+  useEffect(() => {
     document.title = "All Donation";
   }, []);
   useEffect(() => {
@@ -46,7 +46,7 @@ const Alldones = () => {
 
   if (loading || loadingDonations) {
     return (
-     <div className="h-screen flex justify-center items-center">
+      <div className="h-screen flex justify-center items-center">
         <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
       </div>
     );
@@ -106,7 +106,7 @@ const Alldones = () => {
             />
             <div className="p-5 space-y-3">
               <h3 className="text-xl font-bold text-[#6B3E2E]">
-                {donation.title}
+                {donation.donationTitle}
               </h3>
               <p className="text-sm text-gray-700">
                 🍽️ <strong>Restaurant:</strong> {donation.restaurantName} (
@@ -119,7 +119,8 @@ const Alldones = () => {
                 )}
               </p>
               <p className="text-sm text-gray-700">
-                ⏰ <strong>Pickup Time:</strong> {donation.pickupWindow || "N/A"}
+                ⏰ <strong>Pickup Time:</strong>{" "}
+                {donation.pickupWindow || "N/A"}
               </p>
               <p className="text-sm text-gray-700">
                 📦 <strong>Quantity:</strong> {donation.quantity}

@@ -1,32 +1,32 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { FaCheck, FaTimes } from 'react-icons/fa';
-import Swal from 'sweetalert2';
-import useAxiosSecure from '../../Hook/useAxiosSecure';
-import useAxios from '../../Hook/useAxios';
-import loadingAnimation from '../../assets/loadingAnimation.json'
-import Lottie from 'lottie-react';
-import Useable from '../../Useable';
-import { useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { FaCheck, FaTimes } from "react-icons/fa";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
+import useAxios from "../../Hook/useAxios";
+import loadingAnimation from "../../assets/loadingAnimation.json";
+import Lottie from "lottie-react";
+import Useable from "../../Useable";
+import { useEffect } from "react";
 
 const ManageDonations = () => {
   const queryClient = useQueryClient();
   const axiossecure = useAxiosSecure();
   const axiosSecure = useAxios();
   useEffect(() => {
-     document.title = " Manage Donations";
-   }, []);
-  const { 
-    data: donations = [], 
-    isLoading, 
-    error 
+    document.title = " Manage Donations";
+  }, []);
+  const {
+    data: donations = [],
+    isLoading,
+    error,
   } = useQuery({
-    queryKey: ['donations'],
+    queryKey: ["donations"],
     queryFn: async () => {
       try {
-        const res = await axiossecure.get('/admin/pending-donations');
+        const res = await axiossecure.get("/admin/pending-donations");
         return Array.isArray(res?.data) ? res.data : [];
       } catch (err) {
-        console.error('Error fetching donations:', err);
+        console.error("Error fetching donations:", err);
         throw err;
       }
     },
@@ -34,24 +34,28 @@ const ManageDonations = () => {
 
   const updateStatusMutation = useMutation({
     mutationFn: ({ donationId, status }) =>
-      axiosSecure.patch(`/admin/donations/${donationId}/status`, { status }),
+      axiossecure.patch(`/admin/donations/${donationId}/status`, { status }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['donations'] });
-      Swal.fire('Success', 'Donation status updated', 'success');
+      queryClient.invalidateQueries({ queryKey: ["donations"] });
+      Swal.fire("Success", "Donation status updated", "success");
     },
     onError: (error) => {
-      console.error('Status update error:', error);
-      Swal.fire('Error', error.response?.data?.message || 'Failed to update donation status', 'error');
+      console.error("Status update error:", error);
+      Swal.fire(
+        "Error",
+        error.response?.data?.message || "Failed to update donation status",
+        "error"
+      );
     },
   });
 
   const handleUpdateStatus = (donationId, status) => {
     Swal.fire({
-      title: 'Confirm Status Change',
+      title: "Confirm Status Change",
       text: `Are you sure you want to ${status.toLowerCase()} this donation?`,
-      icon: 'question',
+      icon: "question",
       showCancelButton: true,
-      confirmButtonText: 'Yes, update it!',
+      confirmButtonText: "Yes, update it!",
     }).then((result) => {
       if (result.isConfirmed) {
         updateStatusMutation.mutate({ donationId, status });
@@ -60,9 +64,10 @@ const ManageDonations = () => {
   };
 
   if (isLoading) {
-<div className="h-screen flex justify-center items-center">
-        <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
-      </div>  }
+    <div className="h-screen flex justify-center items-center">
+      <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
+    </div>;
+  }
 
   if (error) {
     return (
@@ -75,7 +80,7 @@ const ManageDonations = () => {
   if (!Array.isArray(donations) || donations.length === 0) {
     return (
       <div className="text-center py-8">
-       <Useable/>
+        <Useable />
       </div>
     );
   }
@@ -116,53 +121,70 @@ const ManageDonations = () => {
                     <div className="flex-shrink-0 h-10 w-10">
                       <img
                         className="h-10 w-10 rounded"
-                        src={donation.image || '/default-donation.png'}
+                        src={donation.image || "/default-donation.png"}
                         alt={donation.title}
                         onError={(e) => {
                           e.target.onerror = null;
-                          e.target.src = '/default-donation.png';
+                          e.target.src = "/default-donation.png";
                         }}
                       />
                     </div>
                     <div className="ml-4">
                       <div className="text-sm font-medium text-gray-900">
-                        {donation.title || 'Untitled Donation'}
+                        {donation.donationTitle || "Untitled Donation"}
                       </div>
                     </div>
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {donation.restaurantName || 'N/A'}
+                  {donation.restaurantName || "N/A"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {donation.foodType || 'N/A'}
+                  {donation.foodType || "N/A"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {donation.quantity || '0'}
+                  {donation.quantity || "0"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                      ${donation.status === 'Verified' ? 'bg-green-100 text-green-800' : 
-                        donation.status === 'Rejected' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}
+                      ${
+                        donation.status === "Verified"
+                          ? "bg-green-100 text-green-800"
+                          : donation.status === "Rejected"
+                          ? "bg-red-100 text-red-800"
+                          : "bg-yellow-100 text-yellow-800"
+                      }`}
                   >
-                    {donation.status || 'Pending'}
+                    {donation.status || "Pending"}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div className="flex space-x-2">
                     <button
-                      onClick={() => handleUpdateStatus(donation._id, 'Verified')}
-                      disabled={donation.status === 'Verified'}
-                      className={`p-2 rounded-md ${donation.status === 'Verified' ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-green-100 text-green-600 hover:bg-green-200'}`}
+                      onClick={() =>
+                        handleUpdateStatus(donation._id, "Verified")
+                      }
+                      disabled={donation.status === "Verified"}
+                      className={`p-2 rounded-md ${
+                        donation.status === "Verified"
+                          ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                          : "bg-green-100 text-green-600 hover:bg-green-200"
+                      }`}
                       title="Verify"
                     >
                       <FaCheck />
                     </button>
                     <button
-                      onClick={() => handleUpdateStatus(donation._id, 'Rejected')}
-                      disabled={donation.status === 'Rejected'}
-                      className={`p-2 rounded-md ${donation.status === 'Rejected' ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-red-100 text-red-600 hover:bg-red-200'}`}
+                      onClick={() =>
+                        handleUpdateStatus(donation._id, "Rejected")
+                      }
+                      disabled={donation.status === "Rejected"}
+                      className={`p-2 rounded-md ${
+                        donation.status === "Rejected"
+                          ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                          : "bg-red-100 text-red-600 hover:bg-red-200"
+                      }`}
                       title="Reject"
                     >
                       <FaTimes />

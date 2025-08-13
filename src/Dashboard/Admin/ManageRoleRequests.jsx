@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import Swal from "sweetalert2";
 import useAxios from "../../Hook/useAxios";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
-import loadingAnimation from '../../assets/loadingAnimation.json'
+import loadingAnimation from "../../assets/loadingAnimation.json";
 import Lottie from "lottie-react";
 
 const ManageRoleRequests = () => {
@@ -11,7 +11,7 @@ const ManageRoleRequests = () => {
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxios();
   const axiossecure = useAxiosSecure();
- useEffect(() => {
+  useEffect(() => {
     document.title = "Manage Role Requests";
   }, []);
   useEffect(() => {
@@ -33,7 +33,7 @@ const ManageRoleRequests = () => {
   const updateStatus = async (id, newStatus) => {
     try {
       setLoading(true);
-      const result = await axiosSecure.patch(`/admin/charity-requests/${id}`, {
+      const result = await axiossecure.patch(`/admin/charity-requests/${id}`, {
         status: newStatus,
       });
 

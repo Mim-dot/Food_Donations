@@ -4,7 +4,7 @@ import { AuthContext } from "../LayOut/AuthContext";
 import RequestDonation from "../From/RequestDonation";
 import AddReview from "../From/AddReview";
 import useAxiosSecure from "../Hook/useAxiosSecure";
-import loadingAnimation from '../assets/loadingAnimation.json'
+import loadingAnimation from "../assets/loadingAnimation.json";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,7 +12,6 @@ import useCheckRole from "../Hook/useCheckRole";
 import Lottie from "lottie-react";
 
 const DonatDetails = () => {
-
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
@@ -22,7 +21,7 @@ const DonatDetails = () => {
   const [pickupTime, setPickupTime] = useState("");
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [reviews, setReviews] = useState([]);
-useEffect(() => {
+  useEffect(() => {
     document.title = "Donation Details";
   }, []);
   // Fetch donation data
@@ -56,7 +55,7 @@ useEffect(() => {
 
   if (!donation || roleLoading)
     return (
-     <div className="h-screen flex justify-center items-center">
+      <div className="h-screen flex justify-center items-center">
         <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
       </div>
     );
@@ -101,8 +100,16 @@ useEffect(() => {
         {donation.status === "Accepted" && role === "charity" && (
           <button
             onClick={async () => {
-              await axiosSecure.patch(`/donations/confirm-pickup/${id}`);
-              toast.success("Marked as Picked Up!");
+              try {
+                await axiosSecure.patch(`/donations/confirm-pickup/${id}`);
+                toast.success("Marked as Picked Up!");
+                setDonation((prev) => ({
+                  ...prev,
+                  status: "Picked Up", // instantly update UI
+                }));
+              } catch (err) {
+                toast.error("Failed to confirm pickup.");
+              }
             }}
             className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition ease-in-out duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-700"
           >

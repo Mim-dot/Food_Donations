@@ -3,6 +3,7 @@ import useAxios from "../../Hook/useAxios";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
+import Useable from "../../Useable";
 
 const CharityRequestsTable = () => {
   const [requests, setRequests] = useState([]);
@@ -51,14 +52,22 @@ const CharityRequestsTable = () => {
   };
 
   if (requests.length === 0) {
-    return <p style={{ textAlign: "center", marginTop: "20px" }}>No requests found.</p>;
+    return <Useable />;
   }
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Charity Requests</h2>
+      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+        Charity Requests
+      </h2>
       <div style={{ overflowX: "auto" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", boxShadow: "0 0 10px rgba(0,0,0,0.1)" }}>
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+          }}
+        >
           <thead style={{ backgroundColor: "#f0f0f0" }}>
             <tr>
               <th style={thStyle}>Donation Title</th>
@@ -76,7 +85,10 @@ const CharityRequestsTable = () => {
                 <td style={tdStyle}>{req.charityEmail || "N/A"}</td>
                 <td style={tdStyle}>{req.donationTitle || "N/A"}</td>
                 <td style={tdStyle}>
-                  <button onClick={() => handleDelete(req._id)} style={deleteBtnStyle}>
+                  <button
+                    onClick={() => handleDelete(req._id)}
+                    style={deleteBtnStyle}
+                  >
                     Delete
                   </button>
                 </td>

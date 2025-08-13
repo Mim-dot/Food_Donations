@@ -4,6 +4,7 @@ import useAxiosSecure from "../../Hook/useAxiosSecure";
 import { AuthContext } from "../../LayOut/AuthContext";
 import AddReview from "../../From/AddReview";
 import useAxios from "../../Hook/useAxios";
+import Useable from "../../Useable";
 
 const ReceivedDonati = () => {
   const axiossecure = useAxiosSecure(); // For authenticated donation requests
@@ -79,7 +80,7 @@ const ReceivedDonati = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          No picked up donations yet.
+          <Useable />
         </motion.p>
       ) : (
         <motion.div className="grid md:grid-cols-2 gap-8">
@@ -135,8 +136,9 @@ const ReceivedDonati = () => {
                       <p>{r.description}</p>
                     </motion.div>
                   ))}
-                {reviews.filter((r) => String(r.donationId) === String(donation._id))
-                  .length === 0 && (
+                {reviews.filter(
+                  (r) => String(r.donationId) === String(donation._id)
+                ).length === 0 && (
                   <p className="text-gray-400 italic">No reviews yet.</p>
                 )}
               </div>
