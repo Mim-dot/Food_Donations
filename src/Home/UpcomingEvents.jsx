@@ -27,12 +27,12 @@ const events = [
 
 export const UpcomingEvents = () => {
   return (
-    <section className="p-6 md:p-10 bg-[#FFFFFF]">
+    <section className=" nav p-6 md:p-10 bg-[#FFFFFF]">
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-3xl md:text-4xl font-bold text-[#7B4F28] text-center mb-8"
+        className="nav-bite text-3xl md:text-4xl font-bold text-[#7B4F28] text-center mb-8"
       >
         Upcoming Events
       </motion.h2>
@@ -44,19 +44,20 @@ export const UpcomingEvents = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.2, duration: 0.5 }}
-            className="bg-[#F5EFE6] border border-[#E0D6CC] rounded-xl p-6 shadow hover:shadow-lg transition"
+            className="bg-[#F5EFE6] nav border border-[#E0D6CC] rounded-xl p-6 shadow hover:shadow-lg transition"
           >
-            <h3 className="text-2xl font-semibold text-[#7B4F28] mb-2">
+            <h3 className="nav-bite text-2xl font-semibold text-[#7B4F28] mb-2">
               {event.title}
             </h3>
-            <p className="text-[#5C3B1D] mb-1">
+            <p className="text-[#5C3B1D] nav-bite mb-1">
               <span className="font-semibold">Date:</span> {event.date}
             </p>
-            <p className="text-[#5C3B1D] mb-3">
-              <span className="font-semibold">Location:</span> {event.location}
+            <p className="text-[#5C3B1D] nav-bite mb-3">
+              <span className="font-semibold nav-bite">Location:</span>{" "}
+              {event.location}
             </p>
-            <p className="text-[#5C3B1D]">{event.description}</p>
-            <button className="mt-4 bg-[#7B4F28] text-white px-4 py-2 rounded hover:bg-[#5c3b1d] transition">
+            <p className="text-[#5C3B1D] nav-bite">{event.description}</p>
+            <button className="mt-4 bg-[#7B4F28]  text-white px-4 py-2 rounded hover:bg-[#5c3b1d] transition">
               Join Event Now
             </button>
           </motion.div>

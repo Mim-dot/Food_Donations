@@ -10,7 +10,7 @@ import { UpcomingEvents } from "./UpcomingEvents";
 
 const Home = () => {
   return (
-    <div>
+    <div className="nav">
       <Banner />
       <FeaturedDonations />
       <CharityRequests />

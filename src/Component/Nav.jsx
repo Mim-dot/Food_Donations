@@ -1,30 +1,53 @@
 import { NavLink } from "react-router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { AuthContext } from "../LayOut/AuthContext";
 
 const Nav = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [isDark, setIsDark] = useState(
+    () => localStorage.getItem("theme") === "dark"
+  );
 
+  // Toggle mobile menu
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  // Apply theme
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
+
+  // Handle logout
   const handleLogout = async () => {
     try {
       await logOut();
-      setIsOpen(false); // close menu on logout
+      setIsOpen(false); // close mobile menu on logout
     } catch (error) {
       console.error("Logout failed:", error);
     }
   };
 
+  // Shared NavLink styles
+  const navLinkClass = ({ isActive }) =>
+    `block px-3 py-2 rounded hover:bg-[#D4A373] hover:text-white transition ${
+      isActive ? "text-[#D4A373]" : ""
+    }`;
+
   return (
-    <nav className="bg-white dark:bg-gray-900 text-[#7B4F28] dark:text-white shadow-md fixed top-0 left-0 w-full z-50 font-[Comfortaa]">
+    <nav className="bg-white  text-[#7B4F28] nav shadow-md fixed top-0 left-0 w-full z-50 font-[Comfortaa]">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo and Site Name */}
+        {/* Logo */}
         <NavLink
           to="/"
-          className="flex items-center gap-2 text-2xl font-bold select-none"
+          className="nav-bite flex items-center gap-2 text-2xl font-bold select-none"
           onClick={() => setIsOpen(false)}
         >
           <img
@@ -36,23 +59,24 @@ const Nav = () => {
         </NavLink>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-6 items-center text-md font-semibold">
-          <NavLink to="/" className={({ isActive }) => (isActive ? "text-[#D4A373]" : "")}>
+        <div className="nav-bite hidden md:flex gap-6 items-center text-md font-semibold">
+          <NavLink to="/" className={navLinkClass}>
             Home
           </NavLink>
-          <NavLink to="/about" className={({ isActive }) => (isActive ? "text-[#D4A373]" : "")}>
+          <NavLink to="/about" className={navLinkClass}>
             About
           </NavLink>
-          <NavLink to="/contact" className={({ isActive }) => (isActive ? "text-[#D4A373]" : "")}>
+          <NavLink to="/contact" className={navLinkClass}>
             Contact
           </NavLink>
 
+          {/* Authenticated links */}
           {user ? (
             <>
-              <NavLink to="/alldonations" className={({ isActive }) => (isActive ? "text-[#D4A373]" : "")}>
+              <NavLink to="/alldonations" className={navLinkClass}>
                 All Donations
               </NavLink>
-              <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "text-[#D4A373]" : "")}>
+              <NavLink to="/dashboard" className={navLinkClass}>
                 Dashboard
               </NavLink>
 
@@ -61,7 +85,10 @@ const Nav = () => {
                 <summary className="m-0 list-none cursor-pointer flex items-center gap-2">
                   <img
                     className="w-8 h-8 rounded-full ring ring-[#D4A373]"
-                    src={user.photoURL || "https://i.ibb.co/yYW5P8g/default-avatar.png"}
+                    src={
+                      user.photoURL ||
+                      "https://i.ibb.co/yYW5P8g/default-avatar.png"
+                    }
                     alt="User"
                   />
                 </summary>
@@ -84,13 +111,21 @@ const Nav = () => {
               </details>
             </>
           ) : (
-            <NavLink to="/auth/login" className={({ isActive }) => (isActive ? "text-[#D4A373]" : "")}>
+            <NavLink to="/auth/login" className={navLinkClass}>
               Login
             </NavLink>
           )}
         </div>
+        {/* Theme toggle */}
+        <button
+          onClick={() => setIsDark(!isDark)}
+          className="btn btn-sm"
+          aria-label="Toggle theme"
+        >
+          {isDark ? "☀" : "🌙"}
+        </button>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile menu button */}
         <button
           className="md:hidden focus:outline-none"
           aria-label="Toggle menu"
@@ -100,29 +135,24 @@ const Nav = () => {
         </button>
       </div>
 
-      {/* Mobile Dropdown Menu + Overlay */}
+      {/* Mobile Menu */}
       {isOpen && (
         <>
-          <div onClick={toggleMenu} className="fixed inset-0 backdrop-blur-sm z-40" />
+          <div
+            onClick={toggleMenu}
+            className="fixed inset-0 backdrop-blur-sm z-40"
+          />
           <div className="md:hidden fixed top-[64px] right-4 bg-[#FAF3E0] dark:bg-gray-800 z-50 shadow-lg border border-[#D4A373] rounded-lg w-48 max-h-60 overflow-y-auto p-2 space-y-1">
-            <NavLink
-              to="/"
-              onClick={toggleMenu}
-              className="block px-3 py-2 rounded hover:bg-[#D4A373] hover:text-white transition"
-            >
+            <NavLink to="/" onClick={toggleMenu} className={navLinkClass}>
               Home
             </NavLink>
-            <NavLink
-              to="/about"
-              onClick={toggleMenu}
-              className="block px-3 py-2 rounded hover:bg-[#D4A373] hover:text-white transition"
-            >
+            <NavLink to="/about" onClick={toggleMenu} className={navLinkClass}>
               About
             </NavLink>
             <NavLink
               to="/contact"
               onClick={toggleMenu}
-              className="block px-3 py-2 rounded hover:bg-[#D4A373] hover:text-white transition"
+              className={navLinkClass}
             >
               Contact
             </NavLink>
@@ -132,14 +162,14 @@ const Nav = () => {
                 <NavLink
                   to="/alldonations"
                   onClick={toggleMenu}
-                  className="block px-3 py-2 rounded hover:bg-[#D4A373] hover:text-white transition"
+                  className={navLinkClass}
                 >
                   All Donations
                 </NavLink>
                 <NavLink
                   to="/dashboard"
                   onClick={toggleMenu}
-                  className="block px-3 py-2 rounded hover:bg-[#D4A373] hover:text-white transition"
+                  className={navLinkClass}
                 >
                   Dashboard
                 </NavLink>
@@ -161,11 +191,19 @@ const Nav = () => {
               <NavLink
                 to="/auth/login"
                 onClick={toggleMenu}
-                className="block px-3 py-2 rounded hover:bg-[#D4A373] hover:text-white transition"
+                className={navLinkClass}
               >
                 Login
               </NavLink>
             )}
+            {/* Theme toggle */}
+            <button
+              onClick={() => setIsDark(!isDark)}
+              className="btn btn-sm"
+              aria-label="Toggle theme"
+            >
+              {isDark ? "☀" : "🌙"}
+            </button>
           </div>
         </>
       )}

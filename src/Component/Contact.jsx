@@ -14,10 +14,10 @@ const Contact = () => {
 
     emailjs
       .sendForm(
-        "service_l3ium29",    
-         "template_flhwjwi",   
+        "service_l3ium29",
+        "template_flhwjwi",
         formRef.current,
-         "SWlV3urXeG_jpZLaO"       
+        "SWlV3urXeG_jpZLaO"
       )
       .then(
         () => {
@@ -40,33 +40,41 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen mt-4 bg-[#F5EFE6] text-[#5C3B1D] py-12 px-6 font-[Comfortaa]">
+    <div className=" nav min-h-screen mt-4 bg-[#F5EFE6] text-[#5C3B1D] py-12 px-6 font-[Comfortaa]">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6 text-center text-[#7B4F28]">Contact Us</h1>
+        <h1 className=" nav-bite text-4xl font-bold mb-6 text-center text-[#7B4F28]">
+          Contact Us
+        </h1>
 
         <div className="grid md:grid-cols-2 gap-10">
           {/* Contact Form */}
-          <form ref={formRef} onSubmit={sendEmail} className="bg-white shadow-md p-6 rounded-xl space-y-4">
-            <h2 className="text-2xl font-semibold text-[#7B4F28] mb-2">Send a Message</h2>
+          <form
+            ref={formRef}
+            onSubmit={sendEmail}
+            className="bg-white nav-bite navv shadow-md p-6 rounded-xl space-y-4"
+          >
+            <h2 className="text-2xl nav-bite font-semibold text-[#7B4F28] mb-2">
+              Send a Message
+            </h2>
             <input
               type="text"
               name="name"
               placeholder="Your Name"
-              className="w-full p-3 border border-[#E0D6CC] rounded-md"
+              className="w-full p-3 border nav-bite border-[#E0D6CC] rounded-md"
               required
             />
             <input
               type="email"
               name="email"
               placeholder="Your Email"
-              className="w-full p-3 border border-[#E0D6CC] rounded-md"
+              className="w-full nav-bite p-3 border border-[#E0D6CC] rounded-md"
               required
             />
             <textarea
               name="message"
               placeholder="Your Message"
               rows="4"
-              className="w-full p-3 border border-[#E0D6CC] rounded-md"
+              className="w-full nav-bite p-3 border border-[#E0D6CC] rounded-md"
               required
             ></textarea>
             <button
@@ -78,9 +86,11 @@ const Contact = () => {
           </form>
 
           {/* Contact Info + FAQ */}
-          <div className="space-y-6">
+          <div className="space-y-6 nav-bite">
             <div>
-              <h2 className="text-2xl font-semibold text-[#7B4F28] mb-2">Contact Information</h2>
+              <h2 className=" nav-bite text-2xl font-semibold text-[#7B4F28] mb-2">
+                Contact Information
+              </h2>
               <p className="flex items-center gap-2">
                 <FaEnvelope /> support@foodshare.org
               </p>
@@ -92,19 +102,34 @@ const Contact = () => {
               </p>
             </div>
 
-            <div>
-              <h2 className="text-2xl font-semibold text-[#7B4F28] mb-2">FAQs</h2>
+            <div className="nav nav-bite">
+              <h2 className="text-2xl nav-bite font-semibold text-[#7B4F28] mb-2">
+                FAQs
+              </h2>
               <details className="mb-3">
-                <summary className="font-medium">How can I become a charity?</summary>
-                <p className="ml-4 mt-1 text-sm">Go to Dashboard → Request Charity Role and complete the payment.</p>
+                <summary className="font-medium">
+                  How can I become a charity?
+                </summary>
+                <p className="ml-4 mt-1 text-sm">
+                  Go to Dashboard → Request Charity Role and complete the
+                  payment.
+                </p>
               </details>
               <details className="mb-3">
-                <summary className="font-medium">Is there any fee for restaurants?</summary>
-                <p className="ml-4 mt-1 text-sm">No. Restaurants can donate food for free after role approval.</p>
+                <summary className="font-medium">
+                  Is there any fee for restaurants?
+                </summary>
+                <p className="ml-4 mt-1 text-sm">
+                  No. Restaurants can donate food for free after role approval.
+                </p>
               </details>
               <details className="mb-3">
-                <summary className="font-medium">How secure is my payment?</summary>
-                <p className="ml-4 mt-1 text-sm">We use Stripe for safe, encrypted transactions.</p>
+                <summary className="font-medium">
+                  How secure is my payment?
+                </summary>
+                <p className="ml-4 mt-1 text-sm">
+                  We use Stripe for safe, encrypted transactions.
+                </p>
               </details>
             </div>
           </div>

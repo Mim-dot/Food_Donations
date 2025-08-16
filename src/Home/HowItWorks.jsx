@@ -36,12 +36,12 @@ const steps = [
 
 export const HowItWorks = () => {
   return (
-    <section className="p-6 md:p-12 bg-[#F5EFE6]">
+    <section className="p-6 md:p-12 nav bg-[#F5EFE6]">
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-3xl md:text-4xl font-bold text-[#7B4F28] text-center mb-12"
+        className="nav-bite text-3xl md:text-4xl font-bold text-[#7B4F28] text-center mb-12"
       >
         How It Works
       </motion.h2>
@@ -54,16 +54,16 @@ export const HowItWorks = () => {
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.05 }}
             transition={{ delay: index * 0.2, duration: 0.5 }}
-            className="bg-[#FFFFFF] border border-[#E0D6CC] rounded-2xl p-8 shadow-lg flex flex-col items-center text-center hover:shadow-2xl cursor-pointer"
+            className="bg-[#FFFFFF] border navv border-[#E0D6CC] rounded-2xl p-8 shadow-lg flex flex-col items-center text-center hover:shadow-2xl cursor-pointer"
           >
-            <div className="flex items-center justify-center w-16 h-16 mb-4 bg-[#D4A373] rounded-full text-white text-2xl">
+            <div className="flex  items-center justify-center w-16 h-16 mb-4 bg-[#D4A373] rounded-full text-white text-2xl">
               {index + 1}
             </div>
-            <div className="mb-4">{step.icon}</div>
-            <h3 className="text-xl font-semibold text-[#7B4F28] mb-2">
+            <div className="mb-4 nav-bite">{step.icon}</div>
+            <h3 className="text-xl nav-bite font-semibold text-[#7B4F28] mb-2">
               {step.title}
             </h3>
-            <p className="text-[#5C3B1D]">{step.description}</p>
+            <p className="text-[#5C3B1D] nav-bite">{step.description}</p>
           </motion.div>
         ))}
       </div>

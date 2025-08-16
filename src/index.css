@@ -1,2 +1,11 @@
 @import "tailwindcss";
 @plugin "daisyui";
+.dark .nav {
+  background-color: rgb(1, 17, 17);
+}
+.dark .nav-bite {
+  color: rgb(190, 106, 75);
+}
+.dark .navv {
+  background: linear-gradient(to bottom, #070707, #252422);
+}
