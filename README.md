@@ -2,10 +2,9 @@
 
 A community-driven MERN stack web platform designed to reduce food waste by connecting local restaurants, charities, and volunteers. This website enables real-time food donation, volunteer collaboration, and impact tracking to ensure edible surplus food reaches those in need instead of being wasted.
 
-
 ## 🔗 Live Site URL
 
-👉 [Visit Live Site](https://your-live-site-url.com)
+👉 [Visit Live Site](https://final-project-1d8f4.web.app/)
 
 ---
 
@@ -26,12 +25,11 @@ A community-driven MERN stack web platform designed to reduce food waste by conn
 
 ## 🛠️ Built With
 
-- **Frontend:** React, Tailwind CSS, Framer Motion, Axios, React Router DOM  
-- **Backend:** Node.js, Express.js, MongoDB, Stripe  
-- **Authentication:** Firebase Auth + JWT  
+- **Frontend:** React, Tailwind CSS, Framer Motion, Axios, React Router DOM
+- **Backend:** Node.js, Express.js, MongoDB, Stripe
+- **Authentication:** Firebase Auth + JWT
 - **Deployment:** Vercel (Client), Render (Server)
 
 ---
 
 ## 📁 Project Structure
-
