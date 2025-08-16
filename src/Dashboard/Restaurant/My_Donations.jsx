@@ -71,43 +71,45 @@ const My_Donations = () => {
   }
 
   return (
-    <section className="bg-[#F5EFE6] min-h-screen p-6">
+    <section className="bg-[#F5EFE6] min-h-screen px-3 sm:px-6 py-6">
       {donations.length === 0 ? (
         <Useable />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {donations.map((donation, index) => (
             <motion.div
               key={donation._id}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white border border-[#E0D6CC] rounded-2xl p-5 shadow-lg hover:shadow-2xl transition-transform duration-300 ease-in-out transform hover:scale-[1.04] flex flex-col"
+              className="bg-white border border-[#E0D6CC] rounded-2xl p-4 sm:p-5 shadow-lg hover:shadow-2xl transition-transform duration-300 ease-in-out transform hover:scale-[1.04] flex flex-col"
             >
+              {/* Donation Image */}
               <img
                 src={donation.image || "https://via.placeholder.com/150"}
                 alt={donation.title}
                 className="w-full h-40 object-cover rounded-md mb-3"
               />
 
+              {/* Donation Info */}
               <div className="flex-grow">
-                <h3 className="text-lg font-bold text-[#7B4F28] mb-1">
+                <h3 className="text-base sm:text-lg font-bold text-[#7B4F28] mb-1">
                   {donation.title}
                 </h3>
-                <p className="text-sm text-[#5C3B1D] mb-1">
+                <p className="text-xs sm:text-sm text-[#5C3B1D] mb-1">
                   <span className="font-semibold">Type:</span>{" "}
                   {donation.foodType}
                 </p>
-                <p className="text-sm text-[#5C3B1D] mb-1">
+                <p className="text-xs sm:text-sm text-[#5C3B1D] mb-1">
                   <span className="font-semibold">Quantity:</span>{" "}
                   {donation.quantity}
                 </p>
-                <p className="text-sm text-[#5C3B1D] mb-1">
+                <p className="text-xs sm:text-sm text-[#5C3B1D] mb-1">
                   <span className="font-semibold">Restaurant:</span>{" "}
                   {donation.restaurantName}
                 </p>
                 <p
-                  className={`text-sm mb-3 font-semibold ${
+                  className={`text-xs sm:text-sm mb-3 font-semibold ${
                     donation.status === "Verified"
                       ? "text-green-600"
                       : donation.status === "Rejected"
@@ -119,18 +121,19 @@ const My_Donations = () => {
                 </p>
               </div>
 
-              <div className="flex justify-between mt-auto">
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row justify-between gap-2 mt-auto">
                 {donation.status !== "Rejected" && (
                   <button
                     onClick={() => handleUpdate(donation)}
-                    className="bg-blue-600 text-white px-4 py-2 text-sm rounded-xl hover:bg-blue-700 transition-colors duration-300 shadow-md hover:shadow-lg"
+                    className="bg-blue-600 text-white px-4 py-2 text-sm rounded-xl hover:bg-blue-700 transition-colors duration-300 shadow-md hover:shadow-lg w-full sm:w-auto"
                   >
                     Update
                   </button>
                 )}
                 <button
                   onClick={() => handleDelete(donation._id)}
-                  className="bg-red-600 text-white px-4 py-2 text-sm rounded-xl hover:bg-red-700 transition-colors duration-300 shadow-md hover:shadow-lg"
+                  className="bg-red-600 text-white px-4 py-2 text-sm rounded-xl hover:bg-red-700 transition-colors duration-300 shadow-md hover:shadow-lg w-full sm:w-auto"
                 >
                   Delete
                 </button>
@@ -142,9 +145,9 @@ const My_Donations = () => {
 
       {/* Update Donation Modal */}
       {editDonation && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-xl font-bold text-[#7B4F28] mb-4">
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-4">
+          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-sm sm:max-w-md">
+            <h2 className="text-lg sm:text-xl font-bold text-[#7B4F28] mb-4">
               Update Donation
             </h2>
             <UpdateDonationForm

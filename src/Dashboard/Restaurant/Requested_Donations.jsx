@@ -41,16 +41,19 @@ const Requested_Donations = () => {
 
   return (
     <div className="p-6 md:p-10">
+      {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-2xl font-bold text-gray-800 mb-6 text-center"
+        className="text-2xl font-bold text-gray-800 mb-6 text-center dark:text-white"
       >
         All Donation Requests
       </motion.h2>
 
+      {/* Table Wrapper */}
       <div className="overflow-x-auto rounded-xl shadow-lg">
         <table className="min-w-full divide-y divide-gray-200 bg-white dark:bg-gray-900">
+          {/* Table Head */}
           <thead className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
             <tr>
               <th className="py-3 px-4 text-left text-sm font-semibold">
@@ -79,6 +82,8 @@ const Requested_Donations = () => {
               </th>
             </tr>
           </thead>
+
+          {/* Table Body */}
           <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
             {requests.map((req) => (
               <motion.tr
@@ -108,7 +113,7 @@ const Requested_Donations = () => {
                 </td>
                 <td className="py-3 px-4 text-center">
                   {req.status === "Pending" ? (
-                    <div className="flex gap-2 justify-center">
+                    <div className="flex gap-2 justify-center flex-wrap">
                       <button
                         onClick={() =>
                           handleAction(req._id, req.donationId, "Accepted")

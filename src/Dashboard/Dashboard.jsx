@@ -9,16 +9,16 @@ import useCheckRole from "../Hook/useCheckRole";
 
 const Dashboard = () => {
   const location = useLocation();
- const {role,loading}=useCheckRole()
+  const { role, loading } = useCheckRole();
   const isActive = (path) => location.pathname === path;
-useEffect(() => {
+  useEffect(() => {
     document.title = "Dashboard";
   }, []);
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-[#F5EFE6] p-4 md:p-6 gap-4">
       {/* Sidebar */}
-      <aside className="w-full md:w-72 bg-white rounded-2xl shadow-xl border border-[#E0D6CC] p-6 md:p-8 flex flex-col items-center space-y-6">
+      <aside className="w-full md:w-65 bg-white rounded-2xl shadow-xl border border-[#E0D6CC] p-6 md:p-4 flex flex-col items-center space-y-6">
         {/* Profile Picture */}
         <ProfileDes />
 
