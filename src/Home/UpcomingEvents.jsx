@@ -34,7 +34,7 @@ export const UpcomingEvents = () => {
         transition={{ duration: 0.5 }}
         className="text-3xl md:text-4xl font-bold text-[#7B4F28] text-center mb-8"
       >
-        Upcoming Events / Campaigns
+        Upcoming Events
       </motion.h2>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -57,7 +57,7 @@ export const UpcomingEvents = () => {
             </p>
             <p className="text-[#5C3B1D]">{event.description}</p>
             <button className="mt-4 bg-[#7B4F28] text-white px-4 py-2 rounded hover:bg-[#5c3b1d] transition">
-              Join Event
+              Join Event Now
             </button>
           </motion.div>
         ))}
@@ -65,3 +65,4 @@ export const UpcomingEvents = () => {
     </section>
   );
 };
+export default UpcomingEvents;
