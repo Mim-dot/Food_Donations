@@ -57,7 +57,10 @@ const CharityRequestsTable = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+      <h2
+        style={{ textAlign: "center", marginBottom: "20px", fontSize: "20px" }}
+        className="nav-w"
+      >
         Charity Requests
       </h2>
       <div style={{ overflowX: "auto" }}>
@@ -79,7 +82,11 @@ const CharityRequestsTable = () => {
           </thead>
           <tbody>
             {requests.map((req) => (
-              <tr key={req._id} style={{ borderBottom: "1px solid #ddd" }}>
+              <tr
+                key={req._id}
+                className=" nav-bite"
+                style={{ borderBottom: "1px solid #ddd" }}
+              >
                 <td style={tdStyle}>{req.donationTitle || "N/A"}</td>
                 <td style={tdStyle}>{req.charityName || "N/A"}</td>
                 <td style={tdStyle}>{req.charityEmail || "N/A"}</td>

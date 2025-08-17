@@ -71,7 +71,7 @@ const My_Donations = () => {
   }
 
   return (
-    <section className="bg-[#F5EFE6] min-h-screen px-3 sm:px-6 py-6">
+    <section className="bg-[#F5EFE6] nav min-h-screen px-3 sm:px-6 py-6">
       {donations.length === 0 ? (
         <Useable />
       ) : (
@@ -82,7 +82,7 @@ const My_Donations = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white border border-[#E0D6CC] rounded-2xl p-4 sm:p-5 shadow-lg hover:shadow-2xl transition-transform duration-300 ease-in-out transform hover:scale-[1.04] flex flex-col"
+              className="bg-white navv nav-b border border-[#E0D6CC] rounded-2xl p-4 sm:p-5 shadow-lg hover:shadow-2xl transition-transform duration-300 ease-in-out transform hover:scale-[1.04] flex flex-col"
             >
               {/* Donation Image */}
               <img
@@ -93,18 +93,18 @@ const My_Donations = () => {
 
               {/* Donation Info */}
               <div className="flex-grow">
-                <h3 className="text-base sm:text-lg font-bold text-[#7B4F28] mb-1">
+                <h3 className="text-base  nav-bite sm:text-lg font-bold text-[#7B4F28] mb-1">
                   {donation.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#5C3B1D] mb-1">
-                  <span className="font-semibold">Type:</span>{" "}
+                <p className="text-xs  nav-bite sm:text-sm text-[#5C3B1D] mb-1">
+                  <span className="font-semibold  nav-bite">Type:</span>{" "}
                   {donation.foodType}
                 </p>
-                <p className="text-xs sm:text-sm text-[#5C3B1D] mb-1">
-                  <span className="font-semibold">Quantity:</span>{" "}
+                <p className="text-xs sm:text-sm nav-bite text-[#5C3B1D] mb-1">
+                  <span className="font-semibold nav-bite">Quantity:</span>{" "}
                   {donation.quantity}
                 </p>
-                <p className="text-xs sm:text-sm text-[#5C3B1D] mb-1">
+                <p className="text-xs sm:text-sm nav-bite text-[#5C3B1D] mb-1">
                   <span className="font-semibold">Restaurant:</span>{" "}
                   {donation.restaurantName}
                 </p>

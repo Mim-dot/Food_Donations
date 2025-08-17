@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../LayOut/AuthContext";
 import useAxios from "../../Hook/useAxios";
 import { motion, AnimatePresence } from "framer-motion";
-import loadingAnimation from '../../assets/loadingAnimation.json'
+import loadingAnimation from "../../assets/loadingAnimation.json";
 import Lottie from "lottie-react";
 import Useable from "../../Useable";
 
@@ -14,7 +14,7 @@ const My_Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxios();
- useEffect(() => {
+  useEffect(() => {
     document.title = "My_Reviews";
   }, []);
   useEffect(() => {
@@ -47,49 +47,49 @@ const My_Reviews = () => {
   }, [user, axiosSecure]);
 
   const handleDelete = async (reviewId) => {
-  console.log("Delete requested for reviewId:", reviewId);
-  const result = await Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#d33",
-    cancelButtonColor: "#3085d6",
-    confirmButtonText: "Yes, delete it!",
-  });
+    console.log("Delete requested for reviewId:", reviewId);
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
 
-  if (result.isConfirmed) {
-    try {
-      const response = await axiosSecure.delete(`/api/reviews/${reviewId}`);
-      console.log("Full response:", response);
-      
-      if (response.data?.deletedId) {
-        setReviews(prev => prev.filter(r => r._id !== reviewId));
-        toast.success("Review deleted successfully");
-      } else {
-        throw new Error("Unexpected response format");
+    if (result.isConfirmed) {
+      try {
+        const response = await axiosSecure.delete(`/api/reviews/${reviewId}`);
+        console.log("Full response:", response);
+
+        if (response.data?.deletedId) {
+          setReviews((prev) => prev.filter((r) => r._id !== reviewId));
+          toast.success("Review deleted successfully");
+        } else {
+          throw new Error("Unexpected response format");
+        }
+      } catch (error) {
+        console.error("Full error details:", {
+          message: error.message,
+          response: error.response?.data,
+          status: error.response?.status,
+        });
+        toast.error(error.response?.data?.error || "Failed to delete review");
       }
-    } catch (error) {
-      console.error("Full error details:", {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status
-      });
-      toast.error(error.response?.data?.error || "Failed to delete review");
     }
-  }
-};
+  };
   if (loading)
     return (
-     <div className="h-screen flex justify-center items-center">
+      <div className="h-screen flex justify-center items-center">
         <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
       </div>
     );
 
   if (!reviews.length)
     return (
-      <div >
-       <Useable/>
+      <div>
+        <Useable />
       </div>
     );
 
@@ -115,7 +115,6 @@ const My_Reviews = () => {
               boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
             }}
             style={{
-              background: "#fff",
               borderRadius: 12,
               padding: 24,
               marginBottom: 24,
@@ -123,25 +122,28 @@ const My_Reviews = () => {
               cursor: "default",
               userSelect: "none",
             }}
+            className="nav bg-white"
           >
             <h3
               style={{
                 marginBottom: 8,
-                color: "#222",
+
                 fontWeight: "700",
                 fontSize: 22,
                 textTransform: "capitalize",
               }}
+              className=" nav-bite text-black"
             >
               {review.donationInfo?.donationTitle || "No title"}
             </h3>
             <p
               style={{
                 fontSize: 14,
-                color: "#555",
+
                 marginBottom: 6,
                 fontWeight: "600",
               }}
+              className=" nav-bite text-gray-800"
             >
               <strong>Restaurant:</strong>{" "}
               {review.donationInfo?.restaurantName || "Unknown"}
@@ -149,10 +151,10 @@ const My_Reviews = () => {
             <p
               style={{
                 fontSize: 13,
-                color: "#777",
                 marginBottom: 16,
                 fontStyle: "italic",
               }}
+              className=" nav-bite text-gray-600"
             >
               <strong>Reviewed on:</strong>{" "}
               {new Date(review.createdAt).toLocaleString()}
@@ -160,11 +162,12 @@ const My_Reviews = () => {
             <p
               style={{
                 fontSize: 16,
-                color: "#333",
+
                 marginBottom: 20,
                 lineHeight: 1.5,
                 whiteSpace: "pre-wrap",
               }}
+              className=" nav-bite text-black"
             >
               {review.description}
             </p>

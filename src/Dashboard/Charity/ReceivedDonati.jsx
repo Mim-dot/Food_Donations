@@ -87,11 +87,11 @@ const ReceivedDonati = () => {
           {donations.map((donation) => (
             <motion.div
               key={donation._id}
-              className="border border-[#E0D6CC] p-6 rounded-xl bg-white cursor-pointer select-none"
+              className="border nav  nav-bite border-[#E0D6CC] p-6 rounded-xl bg-white cursor-pointer select-none"
               variants={cardVariants}
               whileHover="hover"
             >
-              <h3 className="text-xl font-semibold text-[#5C3B1D] mb-3">
+              <h3 className="text-xl nav-bite font-semibold text-[#5C3B1D] mb-3">
                 {donation.donationTitle}
               </h3>
               <p>
@@ -139,7 +139,7 @@ const ReceivedDonati = () => {
                 {reviews.filter(
                   (r) => String(r.donationId) === String(donation._id)
                 ).length === 0 && (
-                  <p className="text-gray-400 italic">No reviews yet.</p>
+                  <p className="text-gray-400 italic nav-w">No reviews yet.</p>
                 )}
               </div>
             </motion.div>

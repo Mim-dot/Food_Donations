@@ -69,25 +69,25 @@ const MyPickups = () => {
       {pickups.map((pickup) => (
         <div
           key={pickup._id}
-          className="bg-white/90 rounded-2xl border border-[#ECD9C6] shadow-md p-6 flex flex-col md:flex-row md:justify-between md:items-center hover:scale-[1.01] transition-all duration-300"
+          className="bg-white/90 nav rounded-2xl border border-[#ECD9C6] shadow-md p-6 flex flex-col md:flex-row md:justify-between md:items-center hover:scale-[1.01] transition-all duration-300"
         >
           <div>
-            <h3 className="text-xl font-bold text-[#7B4F28]">
+            <h3 className="text-xl nav-bite font-bold text-[#7B4F28]">
               {pickup.donationTitle}
             </h3>
-            <p className="text-sm text-[#5C3B1D]">
+            <p className="text-sm nav-bite text-[#5C3B1D]">
               🏪 Restaurant: {pickup.restaurantName}
             </p>
-            <p className="text-sm text-[#5C3B1D]">
+            <p className="text-sm nav-bite text-[#5C3B1D]">
               📍 Location: {pickup.location || "N/A"}
             </p>
-            <p className="text-sm text-[#5C3B1D]">
+            <p className="text-sm nav-bite text-[#5C3B1D]">
               🥘 Food Type: {pickup.foodType}
             </p>
-            <p className="text-sm text-[#5C3B1D]">
+            <p className="text-sm nav-bite text-[#5C3B1D]">
               📦 Quantity: {pickup.quantity}
             </p>
-            <p className="text-sm text-[#5C3B1D]">
+            <p className="text-sm nav-bite text-[#5C3B1D]">
               🕓 Pickup Time: {pickup.pickupTime || "Not Provided"}
             </p>
             <p className="mt-2 inline-block bg-green-100 text-green-700 font-medium text-sm px-3 py-1 rounded-full">

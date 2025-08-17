@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router"; 
+import { Link } from "react-router";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import { AuthContext } from "../../LayOut/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
-import Swal from "sweetalert2";     
+import Swal from "sweetalert2";
 import "react-toastify/dist/ReactToastify.css";
-import loadingAnimation from '../../assets/loadingAnimation.json'
+import loadingAnimation from "../../assets/loadingAnimation.json";
 import Lottie from "lottie-react";
 import Useable from "../../Useable";
 
@@ -16,7 +16,7 @@ const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [removingId, setRemovingId] = useState(null);
-useEffect(() => {
+  useEffect(() => {
     document.title = "Favorites";
   }, []);
   useEffect(() => {
@@ -30,7 +30,9 @@ useEffect(() => {
 
         const donations = await Promise.all(
           favs.map((fav) =>
-            axiosSecure.get(`/donations/${fav.donationId}`).then((res) => res.data)
+            axiosSecure
+              .get(`/donations/${fav.donationId}`)
+              .then((res) => res.data)
           )
         );
 
@@ -78,17 +80,14 @@ useEffect(() => {
     }
   };
 
-  if (loading)
-    return 
-(
+  if (loading) return;
   <div className="h-screen flex justify-center items-center">
-        <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
-      </div>
-)
+    <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
+  </div>;
   if (favorites.length === 0)
     return (
       <p className="text-center mt-10 text-gray-600">
-       <Useable/>
+        <Useable />
       </p>
     );
 
@@ -100,23 +99,24 @@ useEffect(() => {
           return (
             <div
               key={fav._id}
-              className="bg-white rounded shadow p-4 flex flex-col"
+              className="bg-white nav border nav-b rounded shadow p-4 flex flex-col"
             >
               <img
                 src={d.image || "/default-donation.jpg"}
                 alt={d.donationTitle || "Donation Image"}
                 className="h-48 w-full object-cover rounded"
               />
-              <h3 className="text-xl font-semibold mt-4 text-[#7B4F28]">
+              <h3 className="text-xl nav-bite font-semibold mt-4 text-[#7B4F28]">
                 {d.donationTitle || "Untitled"}
               </h3>
-              <p className="mt-1 text-gray-700">
-                <strong>Restaurant:</strong> {d.restaurantName || "Unknown"}, {d.location || "N/A"}
+              <p className="mt-1 nav-bite text-gray-700">
+                <strong>Restaurant:</strong> {d.restaurantName || "Unknown"},{" "}
+                {d.location || "N/A"}
               </p>
-              <p className="text-gray-700">
+              <p className="text-gray-700 nav-bite">
                 <strong>Status:</strong> {d.status || "Unknown"}
               </p>
-              <p className="text-gray-700 mb-4">
+              <p className="text-gray-700 mb-4 nav-bite">
                 <strong>Quantity:</strong> {d.quantity || "Unknown"}
               </p>
 

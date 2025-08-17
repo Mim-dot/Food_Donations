@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../LayOut/AuthContext";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
-import loadingAnimation from '../../assets/loadingAnimation.json'
+import loadingAnimation from "../../assets/loadingAnimation.json";
 import Lottie from "lottie-react";
-
 
 const Transaction_History = () => {
   const { user } = useContext(AuthContext);
@@ -11,9 +10,9 @@ const Transaction_History = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const axiossecure = useAxiosSecure();
- useEffect(() => {
-     document.title = "Transaction_History";
-   }, []);
+  useEffect(() => {
+    document.title = "Transaction_History";
+  }, []);
   useEffect(() => {
     if (!user?.email) return;
 
@@ -49,7 +48,7 @@ const Transaction_History = () => {
   if (error) {
     return (
       <div className="text-center py-8">
-        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 max-w-md mx-auto">
+        <div className="bg-red-100 nav border-l-4 border-red-500 text-red-700 p-4 max-w-md mx-auto">
           <p className="font-medium">Error loading transactions</p>
           <p className="mt-2 text-sm">{error}</p>
           <button
@@ -65,7 +64,7 @@ const Transaction_History = () => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6">Transaction History</h2>
+      <h2 className=" nav-bite text-2xl font-bold mb-6">Transaction History</h2>
 
       {transactions.length === 0 ? (
         <div className="text-center py-8 bg-blue-50 rounded-lg">
@@ -75,7 +74,7 @@ const Transaction_History = () => {
         </div>
       ) : (
         <div className="overflow-x-auto shadow-md rounded-lg">
-          <table className="min-w-full bg-white">
+          <table className="min-w-full  bg-white">
             <thead className="bg-gray-800 text-white">
               <tr>
                 <th className="py-3 px-4 text-left">Transaction ID</th>
@@ -89,7 +88,7 @@ const Transaction_History = () => {
               {transactions.map((tx) => (
                 <tr
                   key={tx._id}
-                  className="hover:bg-gray-50 transition-colors"
+                  className="hover:bg-gray-50  nav-bite transition-colors"
                 >
                   <td className="py-3 px-4">
                     <code className="text-sm bg-gray-100 p-1 rounded break-all">

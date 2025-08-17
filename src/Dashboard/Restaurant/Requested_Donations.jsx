@@ -45,39 +45,39 @@ const Requested_Donations = () => {
       <motion.h2
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-2xl font-bold text-gray-800 mb-6 text-center dark:text-white"
+        className="text-2xl font-bold text-gray-800 mb-6 text-center nav-w"
       >
         All Donation Requests
       </motion.h2>
 
       {/* Table Wrapper */}
       <div className="overflow-x-auto rounded-xl shadow-lg">
-        <table className="min-w-full divide-y divide-gray-200 bg-white dark:bg-gray-900">
+        <table className="min-w-full divide-y divide-gray-200 bg-white nav">
           {/* Table Head */}
-          <thead className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+          <thead className="bg-gradient-to-r  nav-w navv from-blue-500 to-indigo-600 text-white">
             <tr>
-              <th className="py-3 px-4 text-left text-sm font-semibold">
+              <th className=" nav-bite py-3 px-4 text-left text-sm font-semibold">
                 Donation Title
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold">
+              <th className="py-3 nav-bite px-4 text-left text-sm font-semibold">
                 Food Type
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold">
+              <th className="py-3 nav-bite px-4 text-left text-sm font-semibold">
                 Charity Name
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold">
+              <th className="py-3 nav-bite px-4 text-left text-sm font-semibold">
                 Email
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold">
+              <th className="py-3 nav-bite px-4 text-left text-sm font-semibold">
                 Description
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold">
+              <th className="py-3 nav-bite px-4 text-left text-sm font-semibold">
                 Pickup Time
               </th>
-              <th className="py-3 px-4 text-left text-sm font-semibold">
+              <th className="py-3 nav-bite px-4 text-left text-sm font-semibold">
                 Status
               </th>
-              <th className="py-3 px-4 text-center text-sm font-semibold">
+              <th className="py-3 nav-bite px-4 text-center text-sm font-semibold">
                 Actions
               </th>
             </tr>
@@ -90,7 +90,7 @@ const Requested_Donations = () => {
                 key={req._id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="hover:bg-gray-50 dark:hover:bg-gray-800 transition"
+                className="hover:bg-gray-50  nav-bite  transition"
               >
                 <td className="py-3 px-4">{req.donationTitle}</td>
                 <td className="py-3 px-4">{req.foodType}</td>
@@ -132,7 +132,9 @@ const Requested_Donations = () => {
                       </button>
                     </div>
                   ) : (
-                    <span className="text-gray-500 italic">No actions</span>
+                    <span className="text-gray-500 nav-w italic">
+                      No actions
+                    </span>
                   )}
                 </td>
               </motion.tr>

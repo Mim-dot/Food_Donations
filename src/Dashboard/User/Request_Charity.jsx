@@ -17,7 +17,7 @@ const Request_Charity = () => {
   const [isLoading, setIsLoading] = useState(false);
   const axiosSecure = useAxios();
   const axiossecure = useAxiosSecure();
-useEffect(() => {
+  useEffect(() => {
     document.title = "Request Charity";
   }, []);
   // Check for existing request when component mounts
@@ -115,7 +115,7 @@ useEffect(() => {
 
   if (requestExists && !newRequestId) {
     return (
-      <div className="max-w-xl mx-auto mt-10 p-6 bg-yellow-100 text-center rounded-lg">
+      <div className="max-w-xl  mx-auto mt-10 p-6 bg-yellow-100 text-center rounded-lg">
         <h2 className="text-xl font-bold text-red-600">Already Requested</h2>
         <p>Your charity role request is already pending or approved.</p>
         <button
@@ -129,13 +129,13 @@ useEffect(() => {
   }
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-xl nav mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold mb-6 text-center text-green-700">
         Request Charity Role
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block font-semibold">User Name</label>
+          <label className="block nav-bite font-semibold">User Name</label>
           <input
             type="text"
             value={user?.displayName || ""}
@@ -144,40 +144,44 @@ useEffect(() => {
           />
         </div>
         <div>
-          <label className="block font-semibold">User Email</label>
+          <label className=" nav-bite block font-semibold">User Email</label>
           <input
             type="email"
             value={user?.email || ""}
             readOnly
-            className="w-full p-2 border rounded bg-gray-100"
+            className="w-full  p-2 border rounded bg-gray-100"
           />
         </div>
         <div>
-          <label className="block font-semibold">Organization Name*</label>
+          <label className=" nav-bite block font-semibold">
+            Organization Name*
+          </label>
           <input
             type="text"
             required
             placeholder="Your Organization Name"
             value={orgName}
             onChange={(e) => setOrgName(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full wt  p-2 border rounded"
             disabled={requestExists}
           />
         </div>
         <div>
-          <label className="block font-semibold">Mission Statement*</label>
+          <label className="block nav-bite font-semibold">
+            Mission Statement*
+          </label>
           <textarea
             required
             placeholder="Describe your mission..."
             value={mission}
             onChange={(e) => setMission(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full wt p-2 border rounded"
             rows={4}
             disabled={requestExists}
           />
         </div>
         <div>
-          <label className="block font-semibold">Payment Amount</label>
+          <label className="block nav-bite font-semibold">Payment Amount</label>
           <input
             type="text"
             value={`$${fixedAmount} (Fixed)`}

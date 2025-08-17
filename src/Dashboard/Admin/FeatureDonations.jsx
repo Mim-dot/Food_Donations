@@ -84,30 +84,30 @@ const FeatureDonations = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-6">Verified Donations</h1>
+      <h1 className="text-3xl  nav-bite font-bold mb-6">Verified Donations</h1>
 
-      <div className="overflow-x-auto bg-white rounded-lg shadow">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="overflow-x-auto nav bg-white rounded-lg shadow">
+        <table className="min-w-full divide-y  divide-gray-200">
+          <thead className="bg-gray-50 nav ">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3  nav-bite text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Image
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3  nav-bite text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Donation Title
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3  nav-bite text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Food Type
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 nav-bite text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Restaurant Name
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 nav-bite text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Feature
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white nav  divide-y divide-gray-200">
             {donations.map((donation) => (
               <tr key={donation._id}>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -121,16 +121,16 @@ const FeatureDonations = () => {
                     }}
                   />
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <td className="px-6 nav-bite py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   {donation.donationTitle || "Untitled Donation"}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 nav-bite py-4 whitespace-nowrap text-sm text-gray-500">
                   {donation.foodType || "N/A"}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 nav-bite py-4 whitespace-nowrap text-sm text-gray-500">
                   {donation.restaurantName || "N/A"}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px- nav-bite py-4 whitespace-nowrap">
                   <button
                     onClick={() =>
                       handleFeatureToggle(donation._id, donation.isFeatured)

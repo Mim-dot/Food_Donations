@@ -130,20 +130,20 @@ const PaymentForm = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded shadow">
-      <h2 className="text-xl font-bold mb-4">Complete Payment</h2>
+    <div className="max-w-md mx-auto p-6 navv bg-white rounded shadow">
+      <h2 className="text-xl  nav-bite font-bold mb-4">Complete Payment</h2>
       <div className="mb-6">
-        <p className="font-semibold">
+        <p className="font-semibold nav-bite">
           Organization: {charityRequest.organizationName}
         </p>
-        <p className="font-semibold">
+        <p className="font-semibold nav-bite">
           Mission: {charityRequest.missionStatement}
         </p>
-        <p className="font-semibold mt-4">Amount to pay: ${amount}</p>
+        <p className="font-semibold mt-4 nav-bite">Amount to pay: ${amount}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <CardElement className="p-3 border rounded" />
+        <CardElement className="p-3 border rounded wt  n" />
         <button
           type="submit"
           disabled={!stripe || isLoading}

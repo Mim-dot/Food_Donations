@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import { AuthContext } from "../../LayOut/AuthContext";
-import loadingAnimation from '../../assets/loadingAnimation.json'
+import loadingAnimation from "../../assets/loadingAnimation.json";
 import Lottie from "lottie-react";
 import Useable from "../../Useable";
 
@@ -50,14 +50,16 @@ const CharityRequests = () => {
         Swal.fire("Cancelled!", "Your request has been cancelled.", "success");
       } catch (error) {
         console.error("Failed to cancel request", error);
-        toast.error(error.response?.data?.message || "Could not cancel request");
+        toast.error(
+          error.response?.data?.message || "Could not cancel request"
+        );
       }
     }
   };
 
   if (loading)
     return (
-    <div className="h-screen flex justify-center items-center">
+      <div className="h-screen flex justify-center items-center">
         <Lottie animationData={loadingAnimation} loop={true} className="w-48" />
       </div>
     );
@@ -65,7 +67,7 @@ const CharityRequests = () => {
   if (requests.length === 0)
     return (
       <p className="text-center mt-10 text-gray-600 text-lg font-semibold">
-       <Useable/>
+        <Useable />
       </p>
     );
 
@@ -76,20 +78,23 @@ const CharityRequests = () => {
         {requests.map((req) => (
           <div
             key={req._id}
-            className="bg-white/60 backdrop-blur-md border border-[#ECD9C6] rounded-3xl p-6 shadow-lg flex flex-col justify-between transition-transform hover:scale-[1.03] duration-300 ease-in-out"
+            className="bg-white/60 nav backdrop-blur-md border border-[#ECD9C6] rounded-3xl p-6 shadow-lg flex flex-col justify-between transition-transform hover:scale-[1.03] duration-300 ease-in-out"
           >
             <div className="flex flex-col space-y-1">
-              <h3 className="text-3xl font-extrabold tracking-tight text-[#7B4F28]">
+              <h3 className="text-3xl nav-bite font-extrabold tracking-tight text-[#7B4F28]">
                 {req.donationTitle}
               </h3>
-              <p className="text-[#5C3B1D] text-sm md:text-base">
-                🍽️ <span className="font-semibold">Restaurant:</span> {req.restaurantName}
+              <p className="text-[#5C3B1D] nav-bite text-sm md:text-base">
+                🍽️ <span className="font-semibold">Restaurant:</span>{" "}
+                {req.restaurantName}
               </p>
-              <p className="text-[#5C3B1D] text-sm md:text-base">
-                🥗 <span className="font-semibold">Food Type:</span> {req.foodType}
+              <p className="text-[#5C3B1D] nav-bite text-sm md:text-base">
+                🥗 <span className="font-semibold">Food Type:</span>{" "}
+                {req.foodType}
               </p>
-              <p className="text-[#5C3B1D] text-sm md:text-base">
-                📦 <span className="font-semibold">Quantity:</span> {req.quantity}
+              <p className="text-[#5C3B1D] nav-bite text-sm md:text-base">
+                📦 <span className="font-semibold">Quantity:</span>{" "}
+                {req.quantity}
               </p>
 
               <p
