@@ -17,14 +17,11 @@ const ManageUsers = () => {
   const queryClient = useQueryClient();
   const axiossecure = useAxiosSecure();
   const axiosSecure = useAxios();
- useEffect(() => {
-     document.title = "Manage Users";
-   }, []);
+  useEffect(() => {
+    document.title = "Manage Users";
+  }, []);
   // All users fetch
-  const {
-    data: allUsers = [],
-    isLoading,
-  } = useQuery({
+  const { data: allUsers = [], isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiossecure.get("/admin/users");
@@ -106,13 +103,13 @@ const ManageUsers = () => {
   return (
     <section>
       <div className="p-6">
-        <h2 className="text-2xl font-semibold mb-4">Manage Users</h2>
+        <h2 className="text-2xl  nav-bite font-semibold mb-4">Manage Users</h2>
 
         <div className="flex gap-2 mb-6 items-center">
-          <FaSearch />
+          <FaSearch className=" nav-bite" />
           <input
             type="text"
-            className="input input-bordered w-full max-w-md"
+            className="input nav  nav-bite nav-b input-bordered w-full max-w-md"
             placeholder="Search user by email"
             value={emailQuery}
             onChange={(e) => setEmailQuery(e.target.value)}
@@ -126,25 +123,25 @@ const ManageUsers = () => {
         )}
 
         {displayUsers.length > 0 && (
-          <div className="overflow-x-auto bg-white rounded-lg shadow">
+          <div className="overflow-x-auto nav bg-white rounded-lg shadow">
             <table className="min-w-full table-zebra">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-50 nav">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-6  nav-bite py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     User
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-6  nav-bite py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Email
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-6  nav-bite py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Role
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-6  nav-bite py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-white nav divide-y divide-gray-200">
                 {displayUsers.map((user) => (
                   <tr key={user._id}>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -160,18 +157,18 @@ const ManageUsers = () => {
                           />
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">
+                          <div className="text-sm  nav-bite font-medium text-gray-900">
                             {user.name}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6  nav-bite py-4 whitespace-nowrap text-sm text-gray-500">
                       {user.email}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6  nav-bite py-4 whitespace-nowrap">
                       <span
-                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                        className={`px-2   inline-flex text-xs leading-5 font-semibold rounded-full 
                         ${
                           user.role === "admin"
                             ? "bg-purple-100 text-purple-800"
@@ -214,9 +211,7 @@ const ManageUsers = () => {
                           <FaUtensils />
                         </button>
                         <button
-                          onClick={() =>
-                            handleUpdateRole(user._id, "charity")
-                          }
+                          onClick={() => handleUpdateRole(user._id, "charity")}
                           disabled={user.role === "charity"}
                           className={`p-2 rounded-md ${
                             user.role === "charity"

@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { AuthContext } from "../LayOut/AuthContext";
 
-
 const Login = () => {
   const [error, setError] = useState("");
   const [useremail, setUserEmail] = useState("");
-  const { signIn, handleForgetPassword, handleGoogle } = useContext(AuthContext);
+  const { signIn, handleForgetPassword, handleGoogle } =
+    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -18,17 +18,15 @@ const Login = () => {
   }, []);
 
   const handleLogin = (e) => {
-
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     signIn(email, password)
       .then(() => {
-          toast.success("Login successful!");
-       toast.success("Login successful!");
+        toast.success("Login successful!");
+        toast.success("Login successful!");
         const redirectPath = location.state || "/";
         navigate(redirectPath);
-        
       })
       .catch((error) => setError(error.code));
   };
@@ -42,17 +40,14 @@ const Login = () => {
   };
 
   return (
-    <div className="login relative min-h-screen overflow-hidden bg-gradient-to-bl from-[#baebbe] to-white text-black ">
-     
+    <div className="login navv relative min-h-screen overflow-hidden bg-gradient-to-bl from-[#baebbe] to-white text-black ">
       <div className="absolute inset-0 z-0 bg-animated-grid">
-        <div className="absolute top-[-20%] left-[-15%] w-[600px] h-[600px] bg-gradient-to-br from-purple-600 via-blue-500 to-pink-500 opacity-20 rounded-full blur-3xl animate-float"></div>
+        <div className="navv absolute top-[-20%] left-[-15%] w-[600px] h-[600px] bg-gradient-to-br from-purple-600 via-blue-500 to-pink-500 opacity-20 rounded-full blur-3xl animate-float"></div>
         <div className="absolute bottom-[-25%] right-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-yellow-400 via-orange-500 to-red-500 opacity-10 rounded-full blur-2xl animate-ping"></div>
         <div className="absolute inset-0  backdrop-blur-sm"></div>
       </div>
 
-    
       <div className="relative z-10 grid md:grid-cols-2 items-center min-h-screen px-8 py-12">
-       
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -60,7 +55,7 @@ const Login = () => {
           whileHover={{ scale: 1.02 }}
           className="text-white text-center md:text-left"
         >
-           <motion.h1
+          <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -68,12 +63,12 @@ const Login = () => {
           >
             Welcome to ShareBite
           </motion.h1>
-          <p className="login-p text-lg text-black max-w-sm mx-auto md:mx-0">
-            Connect with Food Donation. Get your tasks done quickly & easily. Log in to get started.
+          <p className="nav-w text-lg text-black max-w-sm mx-auto md:mx-0">
+            Connect with Food Donation. Get your tasks done quickly & easily.
+            Log in to get started.
           </p>
         </motion.div>
 
-        
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -137,15 +132,16 @@ const Login = () => {
 
             <p className="text-center text-sm mt-3 text-gray-300">
               New here?{" "}
-              <Link to="/auth/register" className="text-orange-300 hover:underline">
+              <Link
+                to="/auth/register"
+                className="text-orange-300 hover:underline"
+              >
                 Register Now
               </Link>
             </p>
           </form>
         </motion.div>
       </div>
-
-     
     </div>
   );
 };

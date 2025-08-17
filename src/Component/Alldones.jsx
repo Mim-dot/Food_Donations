@@ -57,9 +57,9 @@ const Alldones = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 mt-20">
+    <div className="max-w-7xl nav mx-auto px-4 mt-20">
       <motion.h2
-        className="text-4xl font-bold text-center mb-8 text-[#512B1B] tracking-wide"
+        className="text-4xl nav-bite font-bold text-center mb-8 text-[#512B1B] tracking-wide"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -72,13 +72,13 @@ const Alldones = () => {
         <input
           type="text"
           placeholder="Search by location..."
-          className="border border-gray-300 p-2 rounded-md w-full md:w-1/2 shadow focus:outline-none focus:ring-2 focus:ring-[#512B1B]"
+          className="border nav-w border-gray-300 p-2   rounded-md w-full md:w-1/2 shadow focus:outline-none focus:ring-2 focus:ring-[#512B1B]"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
         <select
-          className="border border-gray-300 p-2 rounded-md w-full md:w-1/3 shadow focus:outline-none focus:ring-2 focus:ring-[#512B1B]"
+          className="border nav-w nav border-gray-300 p-2 rounded-md w-full md:w-1/3 shadow focus:outline-none focus:ring-2 focus:ring-[#512B1B]"
           value={sortOption}
           onChange={(e) => setSortOption(e.target.value)}
         >
@@ -93,7 +93,7 @@ const Alldones = () => {
         {sorted.map((donation, index) => (
           <motion.div
             key={donation._id}
-            className="bg-gradient-to-br from-[#FFF8F1] to-[#F1E5D6] border border-[#E7D4BD] rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition"
+            className="bg-gradient-to-br navv  from-[#FFF8F1] to-[#F1E5D6] border border-[#E7D4BD] rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition"
             whileHover={{ scale: 1.03 }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -104,25 +104,25 @@ const Alldones = () => {
               alt={donation.title}
               className="h-48 w-full object-cover rounded-t-2xl"
             />
-            <div className="p-5 space-y-3">
-              <h3 className="text-xl font-bold text-[#6B3E2E]">
+            <div className="p-5 space-y-3 ">
+              <h3 className="text-xl font-bold  nav-bite text-[#6B3E2E]">
                 {donation.donationTitle}
               </h3>
-              <p className="text-sm text-gray-700">
+              <p className="text-sm  nav-bite text-gray-700">
                 🍽️ <strong>Restaurant:</strong> {donation.restaurantName} (
                 {donation.location || "Unknown"})
               </p>
-              <p className="text-sm text-gray-700">
+              <p className="text-sm  nav-bite text-gray-700">
                 ❤️ <strong>Charity:</strong>{" "}
                 {donation.organizationName || (
-                  <span className="text-gray-400">Not assigned</span>
+                  <span className="text-gray-400  nav-bite">Not assigned</span>
                 )}
               </p>
-              <p className="text-sm text-gray-700">
+              <p className="text-sm  nav-bite text-gray-700">
                 ⏰ <strong>Pickup Time:</strong>{" "}
                 {donation.pickupWindow || "N/A"}
               </p>
-              <p className="text-sm text-gray-700">
+              <p className="text-sm  nav-bite text-gray-700">
                 📦 <strong>Quantity:</strong> {donation.quantity}
               </p>
 

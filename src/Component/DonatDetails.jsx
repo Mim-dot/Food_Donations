@@ -61,21 +61,21 @@ const DonatDetails = () => {
     );
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-[#F9F7F2] rounded-2xl shadow-xl mt-24 border border-[#EDE9E5]">
-      <h1 className="text-4xl font-extrabold text-[#7B4F28] mb-6 tracking-wide drop-shadow-sm">
+    <div className="max-w-3xl nav mx-auto p-8 bg-[#F9F7F2] rounded-2xl shadow-xl mt-24 border border-[#EDE9E5]">
+      <h1 className=" nav-bite text-4xl font-extrabold text-[#7B4F28] mb-6 tracking-wide drop-shadow-sm">
         {donation.donationTitle}
       </h1>
-      <p className="text-[#5C3B1D] mb-3 text-lg leading-relaxed">
+      <p className="text-[#5C3B1D]  nav-bite mb-3 text-lg leading-relaxed">
         <strong>Description:</strong> {donation.foodType} ,{donation.quantity}
       </p>
-      <p className="text-[#5C3B1D] mb-3 text-lg">
+      <p className="text-[#5C3B1D]  nav-bite mb-3 text-lg">
         <strong>Restaurant:</strong> {donation.restaurantName},{" "}
         {donation.location}
       </p>
-      <p className="text-[#5C3B1D] mb-3 text-lg">
+      <p className="text-[#5C3B1D]  nav-bite mb-3 text-lg">
         <strong>Pickup Time:</strong> {donation.pickupWindow}
       </p>
-      <p className="inline-block bg-[#7B4F28] text-white px-4 py-1 rounded-full font-semibold mb-8 shadow-md">
+      <p className="inline-block   bg-[#7B4F28] text-white px-4 py-1 rounded-full font-semibold mb-8 shadow-md">
         Status: {donation.status}
       </p>
 
@@ -119,7 +119,7 @@ const DonatDetails = () => {
       </div>
 
       <section>
-        <h2 className="text-3xl font-bold text-[#7B4F28] mb-6 tracking-wide drop-shadow-sm">
+        <h2 className=" nav-bite text-3xl font-bold text-[#7B4F28] mb-6 tracking-wide drop-shadow-sm">
           Reviews
         </h2>
         {reviews.length > 0 ? (

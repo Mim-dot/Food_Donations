@@ -147,7 +147,7 @@ const Register = () => {
 
   return (
     <motion.div
-      className="reg relative min-h-screen overflow-hidden bg-white dark:bg-black"
+      className="reg navv relative min-h-screen overflow-hidden bg-white dark:bg-black"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -156,7 +156,7 @@ const Register = () => {
       <div className="absolute inset-0">
         <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-600 opacity-30 rounded-full blur-3xl animate-spin-slow" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-yellow-400 via-orange-500 to-red-500 opacity-20 rounded-full blur-2xl animate-pulse" />
-        <div className="absolute inset-0 bg-gradient-to-br from-white/70 via-transparent to-white/70 dark:from-black/70 dark:to-black/70" />
+        <div className="absolute navv inset-0 bg-gradient-to-br from-white/70 via-transparent to-white/70 dark:from-black/70 dark:to-black/70" />
       </div>
 
       {/* Main Section */}
@@ -166,10 +166,10 @@ const Register = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
-          className="sm:my-6 text-center md:text-left text-black dark:text-white"
+          className="sm:my-6 nav-w text-center md:text-left text-black "
         >
-          <h1 className="text-4xl font-bold mb-3">Join ShareBite</h1>
-          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-sm mx-auto md:mx-0">
+          <h1 className=" nav-w text-4xl font-bold mb-3">Join ShareBite</h1>
+          <p className="nav-w text-lg text-gray-700 dark:text-gray-300 max-w-sm mx-auto md:mx-0">
             Create your account to connect with the community and make a
             difference.
           </p>
@@ -180,22 +180,25 @@ const Register = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="w-full mt-8 max-w-md mx-auto bg-[#F5EFE6] border border-[#E0D6CC] rounded-xl p-8 text-[#5C3B1D]"
+          className="nav  nav-bite w-full mt-8 max-w-md mx-auto bg-[#F5EFE6] border border-[#E0D6CC] rounded-xl p-8 text-[#5C3B1D]"
         >
           <form onSubmit={handleRegister} className="space-y-5">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="text-2xl font-semibold text-center text-[#7B4F28]"
+              className=" nav-bite text-2xl font-semibold text-center text-[#7B4F28]"
             >
               Register
             </motion.h2>
 
             {error === "auth/email-already-in-use" && (
-              <p className="text-sm text-red-600 text-center">
+              <p className="text-sm  nav-bite text-red-600 text-center">
                 Email already registered.{" "}
-                <Link to="/auth/login" className="underline text-[#7B4F28]">
+                <Link
+                  to="/auth/login"
+                  className=" nav-bite underline text-[#7B4F28]"
+                >
                   Login here
                 </Link>
               </p>
@@ -207,13 +210,13 @@ const Register = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <label className="block text-sm font-medium text-[#7B4F28]">
+              <label className=" nav-bite block text-sm font-medium text-[#7B4F28]">
                 Name
               </label>
               <input
                 name="name"
                 type="text"
-                className="input-style border border-[#E0D6CC] text-[#5C3B1D] placeholder-[#a98b6a] focus:ring-2 focus:ring-[#7B4F28]"
+                className=" nav-bite input-style border border-[#E0D6CC] text-[#5C3B1D] placeholder-[#a98b6a] focus:ring-2 focus:ring-[#7B4F28]"
                 required
                 onChange={() => setError("")}
               />
@@ -225,7 +228,7 @@ const Register = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <label className="block text-sm font-medium text-[#7B4F28]">
+              <label className=" nav-bite block text-sm font-medium text-[#7B4F28]">
                 Email
               </label>
               <input
@@ -243,7 +246,7 @@ const Register = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <label className="block text-sm font-medium text-[#7B4F28]">
+              <label className=" nav-bite block text-sm font-medium text-[#7B4F28]">
                 Password
               </label>
               <input
@@ -261,14 +264,14 @@ const Register = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
             >
-              <label className="block text-sm font-medium text-[#7B4F28]">
+              <label className=" nav-bite block text-sm font-medium text-[#7B4F28]">
                 Upload Profile Photo
               </label>
               <input
                 type="file"
                 accept="image/*"
                 onChange={handlePhotoUpload}
-                className="input-style border border-[#E0D6CC] text-[#5C3B1D] cursor-pointer"
+                className=" nav-bite input-style border border-[#E0D6CC] text-[#5C3B1D] cursor-pointer"
                 required
               />
               {photoURL && (
@@ -300,7 +303,7 @@ const Register = () => {
               <button
                 type="button"
                 onClick={handleGoogleLogin}
-                className="text-sm text-[#7B4F28]"
+                className=" nav-bite text-sm text-[#7B4F28]"
               >
                 Register with Google
               </button>
@@ -308,13 +311,16 @@ const Register = () => {
 
             {/* Already have an account */}
             <motion.p
-              className="text-center text-sm mt-3 text-[#5C3B1D]"
+              className=" nav-bite text-center text-sm mt-3 text-[#5C3B1D]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9 }}
             >
               Already have an account?{" "}
-              <Link to="/auth/login" className="text-[#7B4F28] hover:underline">
+              <Link
+                to="/auth/login"
+                className=" nav-bite text-[#7B4F28] hover:underline"
+              >
                 Login
               </Link>
             </motion.p>

@@ -67,14 +67,14 @@ const StatCard = ({ icon, title, value, description, color }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(0,0,0,0.15)" }}
-      className={`bg-white p-5 rounded-xl shadow-md cursor-pointer transition-transform border-t-4 ${borderColorClass}`}
+      className={`bg-white nav nav-w p-5 rounded-xl shadow-md cursor-pointer transition-transform border-t-4 ${borderColorClass}`}
     >
       <div className="flex items-center gap-3 mb-2">
-        <div className={`text-${color}-500 text-3xl`}>{icon}</div>
-        <h3 className="font-bold text-gray-800">{title}</h3>
+        <div className={` nav-bite text-${color}-500 text-3xl`}>{icon}</div>
+        <h3 className=" nav-bite font-bold text-gray-800">{title}</h3>
       </div>
-      <p className="text-4xl font-extrabold mb-1">{value}</p>
-      <p className="text-gray-600">{description}</p>
+      <p className=" nav-bite text-4xl font-extrabold mb-1">{value}</p>
+      <p className=" nav-bite text-gray-600">{description}</p>
     </motion.div>
   );
 };
@@ -88,7 +88,7 @@ const OverviewPage = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen bg-gradient-to-r from-indigo-50 to-white p-8"
+      className="navv min-h-screen bg-gradient-to-r from-indigo-50 to-white p-8"
     >
       {/* Header */}
       <header className="mb-10 max-w-4xl mx-auto">
@@ -138,7 +138,7 @@ const OverviewPage = () => {
         {/* Line Chart - Donation Trends */}
         <motion.div
           whileHover={{ scale: 1.02 }}
-          className="bg-white p-6 rounded-xl shadow-md"
+          className="bg-white nav p-6 rounded-xl shadow-md"
         >
           <h3 className="text-xl font-bold mb-4 text-indigo-700">
             📈 Donation Trends
@@ -162,7 +162,7 @@ const OverviewPage = () => {
         {/* Pie Chart - Category Distribution */}
         <motion.div
           whileHover={{ scale: 1.02 }}
-          className="bg-white p-6 rounded-xl shadow-md"
+          className="bg-white nav p-6 rounded-xl shadow-md"
         >
           <h3 className="text-xl font-bold mb-2 text-indigo-700">
             🥗 Donation Categories

@@ -16,9 +16,9 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-[#F5EFE6] p-4 md:p-6 gap-4">
+    <div className="flex nav flex-col md:flex-row min-h-screen bg-[#F5EFE6] p-4 md:p-6 gap-4">
       {/* Sidebar */}
-      <aside className="w-full md:w-65 bg-white rounded-2xl shadow-xl border border-[#E0D6CC] p-6 md:p-4 flex flex-col items-center space-y-6">
+      <aside className="w-full nav md:w-65 bg-white rounded-2xl shadow-xl border border-[#E0D6CC] p-6 md:p-4 flex flex-col items-center space-y-6">
         {/* Profile Picture */}
         <ProfileDes />
 
@@ -30,7 +30,7 @@ const Dashboard = () => {
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 bg-white rounded-2xl shadow-lg border border-[#E0D6CC] p-2 md:p-2">
+      <main className="flex-1 nav bg-white rounded-2xl shadow-lg border border-[#E0D6CC] p-2 md:p-2">
         <Outlet />
       </main>
     </div>

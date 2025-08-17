@@ -7,6 +7,7 @@ import loadingAnimation from "../../assets/loadingAnimation.json";
 import Lottie from "lottie-react";
 import Useable from "../../Useable";
 import { useEffect } from "react";
+import Error from "../../Component/Error";
 
 const ManageDonations = () => {
   const queryClient = useQueryClient();
@@ -71,8 +72,8 @@ const ManageDonations = () => {
 
   if (error) {
     return (
-      <div className="text-center py-8 text-red-500">
-        Error loading donations: {error.message}
+      <div>
+        <Error />
       </div>
     );
   }
@@ -87,36 +88,36 @@ const ManageDonations = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-6">Manage Donations</h1>
+      <h1 className="text-2xl  nav-bite font-bold mb-6">Manage Donations</h1>
 
-      <div className="overflow-x-auto bg-white rounded-lg shadow">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="overflow-x-auto nav bg-white rounded-lg shadow">
+        <table className="min-w-full nav-b nav divide-y  divide-gray-200">
+          <thead className="bg-gray-50 nav ">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 nav-w text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Donation
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 nav-w py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Restaurant
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 nav-w py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Food Type
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 nav-w py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Quantity
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 nav-w py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 nav-w py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white  nav divide-y divide-gray-200">
             {donations.map((donation) => (
               <tr key={donation._id}>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 nav-w whitespace-nowrap">
                   <div className="flex items-center">
                     <div className="flex-shrink-0 h-10 w-10">
                       <img
@@ -130,22 +131,22 @@ const ManageDonations = () => {
                       />
                     </div>
                     <div className="ml-4">
-                      <div className="text-sm font-medium text-gray-900">
+                      <div className="text-sm  nav-w font-medium text-gray-900">
                         {donation.donationTitle || "Untitled Donation"}
                       </div>
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-4 nav-w whitespace-nowrap text-sm text-gray-500">
                   {donation.restaurantName || "N/A"}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-4 nav-w whitespace-nowrap text-sm text-gray-500">
                   {donation.foodType || "N/A"}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-4 nav-w whitespace-nowrap text-sm text-gray-500">
                   {donation.quantity || "0"}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 nav-w whitespace-nowrap">
                   <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                       ${

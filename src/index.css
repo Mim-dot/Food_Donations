@@ -9,3 +9,9 @@
 .dark .navv {
   background: linear-gradient(to bottom, #070707, #252422);
 }
+.dark .nav-w {
+  color: wheat;
+}
+.dark .nav-b {
+  border-color: beige;
+}

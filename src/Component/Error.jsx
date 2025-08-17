@@ -11,7 +11,7 @@ const Error = () => {
       <div className="max-w-md w-full">
         <Lottie animationData={error} loop={true} />
         <h1 className="text-3xl font-bold text-center mt-6">
-          Oops! Page Not Found
+          Oops!! Page Not Found
         </h1>
         <p className="text-center mt-2 text-sm text-gray-600">
           The page you are looking for doesn't exist or has been moved.
