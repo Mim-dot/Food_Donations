@@ -1,6 +1,8 @@
 # 🌱 Local Food Waste Reduction Platform
-
+ 
 A community-driven MERN stack web platform designed to reduce food waste by connecting local restaurants, charities, and volunteers. This website enables real-time food donation, volunteer collaboration, and impact tracking to ensure edible surplus food reaches those in need instead of being wasted.
+
+![ShareBite Screenshot](https://i.ibb.co.com/MDZDgh02/Screenshot-3.png)
 
 ## 🔗 Live Site URL
 
